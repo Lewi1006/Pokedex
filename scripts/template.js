@@ -1,12 +1,12 @@
-function getCardTemplate(pokemon, indexCard) {
+function getCardTemplate(pokemon, indexCard, colorClass) {
   return /*html*/ `
-     <div class="pkm-card">
+     <div class="pkm-card ${colorClass}">
            <div class="card-header">
                 <h2 class="pkm-name">${pokemon.name}</h2>
                 <p class="pkm-id"># ${pokemon.id}</p>
               </div>
   
-              <div class="card-body">
+              <div class="card-body ">
                 <div id="pkm-types-${indexCard}" >
                     
                 </div>
@@ -18,11 +18,10 @@ function getCardTemplate(pokemon, indexCard) {
     `;
 }
 
-
-function getTypesTemplate(type){
-    return /*html*/`
+function getTypesTemplate(type) {
+  return /*html*/ `
         <div>
             <p>${type.type.name}</p>
         </div>
-    `
+    `;
 }

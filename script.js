@@ -39,18 +39,26 @@ function renderCard() {
 
   for (let indexCard = 0; indexCard < currentPkmArray.length; indexCard++) {
     let pokemon = currentPkmArray[indexCard];
-    cardRef.innerHTML += getCardTemplate(pokemon, indexCard);
+    let colorClass = getTypeClass(pokemon);
+    console.log(colorClass);
+
+    cardRef.innerHTML += getCardTemplate(pokemon, indexCard, colorClass);
 
     renderTypes(pokemon, indexCard);
   }
 }
 
 function renderTypes(pokemon, indexCard) {
-    const typesRef = document.getElementById(`pkm-types-${indexCard}`)
-    typesRef.innerHTML = "";
+  const typesRef = document.getElementById(`pkm-types-${indexCard}`);
+  typesRef.innerHTML = "";
 
-    for(let indexTypes = 0; indexTypes < pokemon.types.length; indexTypes++){
-        let type = pokemon.types[indexTypes]
-        typesRef.innerHTML += getTypesTemplate(type);
-    }
+  for (let indexTypes = 0; indexTypes < pokemon.types.length; indexTypes++) {
+    let type = pokemon.types[indexTypes];
+    typesRef.innerHTML += getTypesTemplate(type);
+  }
+}
+
+
+function getTypeClass(pokemon) {
+  return pokemon.types[0].type.name;
 }
