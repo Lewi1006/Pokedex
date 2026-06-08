@@ -7,10 +7,8 @@ function getCardTemplate(pokemon, indexCard) {
               </div>
   
               <div class="card-body">
-                <div id="pkm-types-${indexCard}">
-                    <div>
-                        <p></p>
-                    </div>
+                <div id="pkm-types-${indexCard}" >
+                    
                 </div>
                 <img id="pkm-img-${indexCard}" src="${pokemon.sprites.other[`official-artwork`].front_default}" alt="${pokemon.name}" />
                 
@@ -18,4 +16,13 @@ function getCardTemplate(pokemon, indexCard) {
 
           </div>
     `;
+}
+
+
+function getTypesTemplate(type){
+    return /*html*/`
+        <div>
+            <p>${type.type.name}</p>
+        </div>
+    `
 }
