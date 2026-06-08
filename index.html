@@ -19,7 +19,7 @@
     <script src="script.js" defer></script>
     <script src="./scripts/template.js" defer></script>
   </head>
-  <body>
+  <body onload="init()">
     <header>
       <div class="content">
         <div class="header-left">
@@ -27,7 +27,8 @@
           <p>Pokadex</p>
         </div>
         <div class="header-right">
-          <input type="search" placeholder="search" />
+          <input type="search" id="pokemon-name "placeholder="search" />
+          <button onclick="">search</button>
         </div>
       </div>
     </header>
@@ -35,20 +36,13 @@
     <main>
       <section class="cards-section">
         <div class="content">
-          <div id="pkm-card">
-            <div class="card-header">
-              <h2 class="pkm-name">Bulbasur</h2>
-              <p class="pkm-id">#001</p>
-            </div>
 
-            <div class="card-body">
-              <div id="pkm-types"></div>
+          <div id="pkm-card-container">
 
-              <div id="pkm-img">
-                <img src="" alt="" />
-              </div>
-            </div>
+            <!-- JS -->
           </div>
+         
+         
         </div>
       </section>
     </main>
