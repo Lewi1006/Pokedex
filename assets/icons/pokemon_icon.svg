@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- outer circle -->
+  <circle cx="100" cy="100" r="90" fill="white" stroke="black" stroke-width="6"></circle>
+
+  <!-- top half (red) -->
+  <path d="M10 100 A90 90 0 0 1 190 100" fill="#e3350d" stroke="black" stroke-width="6" stroke-linecap="round"></path>
+
+  <!-- middle band (now stroked instead of a thick rect) -->
+  <line x1="10" y1="100" x2="190" y2="100" stroke="black" stroke-width="6" stroke-linecap="round"></line>
+
+  <!-- center button outer -->
+  <circle cx="100" cy="100" r="22" fill="white" stroke="black" stroke-width="6"></circle>
+
+  <!-- center button inner -->
+  <circle cx="100" cy="100" r="10" fill="#f2f2f2"></circle>
+
+</svg>
