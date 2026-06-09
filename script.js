@@ -8,6 +8,8 @@ function init() {
   getData();
 }
 
+
+// #region fetch API data
 // all API data is currenty stored in variable const responseAsJson
 async function getData() {
   const response = await fetch(
@@ -40,6 +42,14 @@ async function getPkm(arr) {
 }
 
 
+async function loadAndShowPkm(){
+  
+}
+
+// #endregion
+
+
+// #region render functions
 function renderCard() {
   const cardRef = document.getElementById(`pkm-card-container`);
   cardRef.innerHTML = "";
@@ -71,6 +81,9 @@ function renderDialog(){
     let dialogRef = document.getElementById(`dialog`);
     dialogRef.innerHTML = getDialogTemplate();
 }
+
+
+// #endregion
 
 
 
@@ -117,6 +130,7 @@ function filterAndShowNames(filterWord) {
 }
 
 
+// #region dialog
 
 function openDialog(indexCard){
   let dialogRef = document.getElementById(`dialog`);
@@ -128,3 +142,5 @@ function closeDialog(){
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.close();
 }
+
+// #endregion
