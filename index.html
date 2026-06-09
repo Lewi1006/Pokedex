@@ -27,7 +27,8 @@
           <p>Pokadex</p>
         </div>
         <div class="header-right">
-          <input type="search" id="pokemon-name "placeholder="search" />
+          <!-- <label for="search">Search Pokemon</label> -->
+          <input type="search" id="pokemon-name "placeholder="search" oninput="filterAndShowNames(this.value)"/>
           <!-- <button onclick="">search</button> -->
         </div>
       </div>
