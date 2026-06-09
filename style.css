@@ -73,11 +73,14 @@ main {
     flex-direction: column;
     gap: 10px;
 
+    .pkm-card:hover{
+      filter: drop-shadow(5px 5px 15px #6b6b6b)
+    }
+
     .pkm-card {
       width: 290px;
       min-height: 200px;
       height: auto;
-      _background-color: green;
       border-radius: 30px;
       padding: 16px;
 

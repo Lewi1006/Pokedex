@@ -1,7 +1,7 @@
 // local copy of array of Pokemon Cards
 let currentPkmArray = [];
 
-// empty Array 
+// empty Array
 let pkmFiltered = [];
 
 function init() {
@@ -46,9 +46,10 @@ function renderCard() {
   for (let indexCard = 0; indexCard < pkmFiltered.length; indexCard++) {
     let pokemon = pkmFiltered[indexCard];
     let colorClass = getTypeClass(pokemon);
-    console.log(colorClass);
 
-    cardRef.innerHTML += getCardTemplate(pokemon, indexCard, colorClass);
+    let name = toUpper(pokemon);
+    console.log(name);
+    cardRef.innerHTML += getCardTemplate(pokemon, indexCard, colorClass, name);
 
     renderTypes(pokemon, indexCard);
   }
@@ -64,11 +65,10 @@ function renderTypes(pokemon, indexCard) {
   }
 }
 
-
 // change function so that we check if its certain types like water grass fire etc. if not choose alternative
-// we want to prioritize certain types 
-// new local array where we can compare with types array 
-// if name exists 
+// we want to prioritize certain types
+// new local array where we can compare with types array
+// if name exists
 function getTypeClass(pokemon) {
   const preferred = ["grass", "fire", "water", "electric", "psychic", "ground"];
 
@@ -83,20 +83,26 @@ function getTypeClass(pokemon) {
   return pokemon.types[0].type.name;
 }
 
+// https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+// slice 1 --> shows everything starting from index 1 --> meaning first letter gets sliced
+function toUpper(pokemon) {
+  return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+}
 
-
-//  filter function is predefined and does for loop and so pokemon hére is 
+//  filter function is predefined and does for loop and so pokemon hére is
 // not the same value as pokemon in the other functions
 // it just extracts is in the same way as in renderCard() by going through currentPkmArray and filtering it
 // .filter() is a built-in loop method
 // pokemon is just a local parameter name inside that loop
 // it is NOT connected to other pokemon variables elsewhere
-// also we need to go through the full data as in currentPkmArray and not just the Filtered 
-// but filtered willl always e the same as currentPkm till we type in something into input 
-// cause thats when we call the filter function where we assign new value to pkmfiltered 
-// arr and since we call renderCards() after this will be know the renderedCards thats 
+// also we need to go through the full data as in currentPkmArray and not just the Filtered
+// but filtered willl always e the same as currentPkm till we type in something into input
+// cause thats when we call the filter function where we assign new value to pkmfiltered
+// arr and since we call renderCards() after this will be know the renderedCards thats
 // why renderCards uses pkmFiltered from the start
-function filterAndShowNames(filterWord){
-  pkmFiltered = currentPkmArray.filter(pokemon => pokemon.name.includes(filterWord));
+function filterAndShowNames(filterWord) {
+  pkmFiltered = currentPkmArray.filter((pokemon) =>
+    pokemon.name.includes(filterWord),
+  );
   renderCard();
 }
