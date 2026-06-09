@@ -1,0 +1,9 @@
+dialog {
+  height: 100%;
+  width: 100%;
+  background-color: #f7f7f5;
+  margin: auto;
+  padding: 24px 16px;
+  border-radius: 40px;
+  border: none;
+}

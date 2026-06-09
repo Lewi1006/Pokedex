@@ -38,6 +38,7 @@ header {
     .header-right {
       width: fit-content;
       height: 100%;
+      display: flex;
 
       input {
         border: 1.5px solid #6b6b6b;
@@ -46,6 +47,94 @@ header {
         border-radius: 15px;
         padding-left: 8px;
         font-size: 16px;
+      }
+
+      /* button{
+
+      } */
+    }
+  }
+}
+
+main {
+  width: 100%;
+  height: fit-content;
+}
+
+.cards-section {
+  background-color: #f7f7f5;
+  width: 100%;
+  height: fit-content;
+
+  #pkm-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+
+    .pkm-card:hover{
+      filter: drop-shadow(5px 5px 15px #6b6b6b)
+    }
+
+    .pkm-card {
+      width: 290px;
+      min-height: 200px;
+      height: auto;
+      border-radius: 30px;
+      padding: 16px;
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        h2 {
+          width: 70%;
+          height: fit-content;
+          font-family: "Nunito";
+          font-size: 20px;
+          font-weight: 800;
+          color: #f7f7f5;
+        }
+        p {
+          width: fit-content;
+          height: fit-content;
+          font-size: 16px;
+          color: #f7f7f5;
+        }
+      }
+
+      .card-body {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        div{
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          gap: 16px;
+
+          div {
+              width: fit-content;
+              height: fit-content;
+              padding: 4px 10px;
+              background-color: rgba(255, 255, 255, 0.2);
+              border-radius: 30px;
+
+            p {
+              color: #f7f7f5;
+             
+
+            }
+          }
+        }
+
+        img {
+          height: 150px;
+          width: auto;
+        }
       }
     }
   }

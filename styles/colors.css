@@ -1,3 +1,55 @@
 /* background: #f7f7f5 */
 /* text: #6b6b6b; */
 /* cards: #ffffff */
+
+.pkm-card.grass {
+  background-color: green;
+}
+
+.pkm-card.fire {
+  background-color: #F08030;
+}
+
+.pkm-card.water {
+  background-color: #6890F0;
+}
+
+.pkm-card.normal {
+  background-color: #A8A77A;
+}
+
+.pkm-card.rock {
+  background-color: #B6A136;
+}
+
+.pkm-card.electric {
+  background-color: #F7D02C;
+}
+
+.pkm-card.psychic {
+  background-color: #F95587;
+}
+
+.pkm-card.poison {
+  background-color: #A33EA1;
+}
+
+.pkm-card.ghost {
+  background-color: #735797;
+}
+
+.pkm-card.fighting {
+  background-color: #C22E28;
+}
+
+.pkm-card.ground {
+  background-color: #E2BF65;
+}
+
+.pkm-card.bug {
+  background-color: #A6B91A;
+}
+
+.pkm-card.fairy {
+  background-color: #D685AD;
+}

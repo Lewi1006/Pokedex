@@ -19,29 +19,37 @@
     <script src="script.js" defer></script>
     <script src="./scripts/template.js" defer></script>
   </head>
-  <body>
+  <body onload="init()">
     <header>
       <div class="content">
         <div class="header-left">
-          <img src="./assets/icons/pokemon_icon.svg" alt="pokemon logo"/>
+          <img src="./assets/icons/pokemon_icon.svg" alt="pokemon logo" />
           <p>Pokadex</p>
         </div>
         <div class="header-right">
-          <input type="search" placeholder="search">
+          <!-- <label for="search">Search Pokemon</label> -->
+          <input type="search" id="pokemon-name "placeholder="search" oninput="filterAndShowNames(this.value)"/>
+          <!-- <button onclick="">search</button> -->
         </div>
-
       </div>
     </header>
 
     <main>
-      <section>
+      <section class="cards-section">
+        <div class="content">
 
+          <div id="pkm-card-container">
+
+            <!-- JS -->
+          </div>
+         
+         
+        </div>
       </section>
     </main>
 
-    <dialog></dialog>
+    <dialog id="dialog" onclick="closeDialog()"></dialog>
 
     <footer></footer>
-    
   </body>
 </html>
