@@ -1,8 +1,9 @@
-// local copy of array of Pokemon Cards
+// local copy of API --> stores array of results (Pokemon Cards) 
 let currentPkmArray = [];
 
-// empty Array
+// empty Array that 
 let pkmFiltered = [];
+
 
 function init() {
   getData();
@@ -11,6 +12,7 @@ function init() {
 
 // #region fetch API data
 // all API data is currenty stored in variable const responseAsJson
+// call getPkm() function and pass the value of property results(shows pokemon data)
 async function getData() {
   const response = await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`,
@@ -21,9 +23,12 @@ async function getData() {
   getPkm(responseAsJson.results);
 }
 
-// get data passes the results array (pokemon objects) as an argument
-// push the pokemon objects into new empty local array so we seperated them
-// we now only fetch url property and access that data (pokemons)
+// getData passes the results array (pokemon objects) as an argument int0 getPkm(arr)
+// push the pokemon objects into new empty local array currentPkmArray[] 
+// iterate through results array and only fetch url property and access that data (pokemons)
+// pokemon data gets pushed into array 
+// duplicate currentPkmArray to pkmFiltered so we can filter through the copy and do not touch original data
+// renderCard() cause we want to update card with the data
 async function getPkm(arr) {
   currentPkmArray = [];
 
@@ -43,13 +48,20 @@ async function getPkm(arr) {
 
 
 async function loadAndShowPkm(){
-  
+
 }
 
 // #endregion
 
 
 // #region render functions
+// render pokemon cards into html by iterating through pkmFiltered array (pokemon data)
+// a single pokemon is the value of the index of pkmFiltered
+// we assign the type to the colorClass variable so it can be passed into template
+// we call toUpper function that capitalizes name and store it in variable name that gets passed into template
+// --> by passing pokemon value into it we make sure its the right index
+// with the for loop we fill individual cards with data by filling inner.html of getCardTemplate
+// call renderTypes cause we need that value to render the Card
 function renderCard() {
   const cardRef = document.getElementById(`pkm-card-container`);
   cardRef.innerHTML = "";
@@ -57,15 +69,21 @@ function renderCard() {
   for (let indexCard = 0; indexCard < pkmFiltered.length; indexCard++) {
     let pokemon = pkmFiltered[indexCard];
     let colorClass = getTypeClass(pokemon);
-
     let name = toUpper(pokemon);
     console.log(name);
+
     cardRef.innerHTML += getCardTemplate(pokemon, indexCard, colorClass, name);
 
     renderTypes(pokemon, indexCard);
   }
 }
 
+
+// seperate rendering of types array within each pokemon(=indexCard) 
+// access ID in getCardTemplate for types give them index as number to make them unique
+// assign the object that is at index of the type array to the variable type
+// pass type into getTypesTemplate
+// access type.type.name === pokemon.types[indexTypes].type.name in template
 function renderTypes(pokemon, indexCard) {
   const typesRef = document.getElementById(`pkm-types-${indexCard}`);
   typesRef.innerHTML = "";
@@ -75,6 +93,7 @@ function renderTypes(pokemon, indexCard) {
     typesRef.innerHTML += getTypesTemplate(type);
   }
 }
+
 
 
 function renderDialog(){
@@ -87,10 +106,13 @@ function renderDialog(){
 
 
 
-// change function so that we check if its certain types like water grass fire etc. if not choose alternative
+
 // we want to prioritize certain types
-// new local array where we can compare with types array
-// if name exists
+// new local array of preferred types 
+// where we can compare with types array if name exists
+// loop through pref and through types array
+// if name property of types array equals any string in pref array --> return this certain value
+// if not return the first name
 function getTypeClass(pokemon) {
   const preferred = ["grass", "fire", "water", "electric", "psychic", "ground"];
 
