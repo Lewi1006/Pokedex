@@ -39,6 +39,7 @@ async function getPkm(arr) {
   renderCard();
 }
 
+
 function renderCard() {
   const cardRef = document.getElementById(`pkm-card-container`);
   cardRef.innerHTML = "";
@@ -64,6 +65,14 @@ function renderTypes(pokemon, indexCard) {
     typesRef.innerHTML += getTypesTemplate(type);
   }
 }
+
+
+function renderDialog(){
+    let dialogRef = document.getElementById(`dialog`);
+    dialogRef.innerHTML = getDialogTemplate();
+}
+
+
 
 // change function so that we check if its certain types like water grass fire etc. if not choose alternative
 // we want to prioritize certain types
@@ -105,4 +114,17 @@ function filterAndShowNames(filterWord) {
     pokemon.name.includes(filterWord),
   );
   renderCard();
+}
+
+
+
+function openDialog(indexCard){
+  let dialogRef = document.getElementById(`dialog`);
+  dialogRef.showModal();
+  renderDialog();
+}
+
+function closeDialog(){
+  let dialogRef = document.getElementById(`dialog`);
+  dialogRef.close();
 }

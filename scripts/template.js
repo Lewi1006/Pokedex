@@ -1,6 +1,6 @@
 function getCardTemplate(pokemon, indexCard, colorClass, name) {
   return /*html*/ `
-     <div class="pkm-card ${colorClass}">
+     <div class="pkm-card ${colorClass}" onclick="openDialog(${indexCard})">
            <div class="card-header">
                 <h2 class="pkm-name">${name}</h2>
                 <p class="pkm-id"># ${pokemon.id}</p>
@@ -24,4 +24,14 @@ function getTypesTemplate(type) {
             <p>${type.type.name}</p>
         </div>
     `;
+}
+
+
+function getDialogTemplate(){
+    return /*html*/`
+    <div class="dialog-wrapper">
+        
+    </div>
+        
+    `
 }
