@@ -96,9 +96,11 @@ function renderTypes(pokemon, indexCard) {
 
 
 
-function renderDialog(){
+function renderDialog(indexCard){
+    let pokemon = pkmFiltered[indexCard];
+
     let dialogRef = document.getElementById(`dialog`);
-    dialogRef.innerHTML = getDialogTemplate();
+    dialogRef.innerHTML = getDialogTemplate(pokemon);
 }
 
 
@@ -157,7 +159,7 @@ function filterAndShowNames(filterWord) {
 function openDialog(indexCard){
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.showModal();
-  renderDialog();
+  renderDialog(indexCard);
 }
 
 function closeDialog(){
@@ -166,3 +168,9 @@ function closeDialog(){
 }
 
 // #endregion
+
+
+
+
+
+// continue working on render function for dialog

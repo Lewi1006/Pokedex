@@ -26,12 +26,36 @@ function getTypesTemplate(type) {
     `;
 }
 
-
-function getDialogTemplate(){
-    return /*html*/`
+function getDialogTemplate(pokemon) {
+  return /*html*/ `
     <div class="dialog-wrapper">
+        <header class="dialog-header">
+            <img src="./assets/icons/left_arrow.svg" alt="left arrow"/>
+            <img src="./assets/icons/right_arrow.svg" alt="right arrow"/>
+        </header>
+
+        <div class="body">
+         <div class="top">   
+         <div>
+             <h1>${pokemon.name}</h1>
+            <p># ${pokemon.id}</p>
+            
+        </div>
+
+        <div>
+            <p>types</p>
+        </div>
+
+        <img src="${pokemon.sprites.other[`official-artwork`].front_default}" alt="${pokemon.name}" />
+        
+        </div>
+
+
+         <div class="bottom">
+            </div>
+</div>
         
     </div>
         
-    `
+    `;
 }
