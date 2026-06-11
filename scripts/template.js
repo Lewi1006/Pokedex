@@ -61,10 +61,10 @@ function getDialogTemplate(pokemon, colorClass, name, indexCard) {
                 <button class="tablinks" onclick=""><p>Moves</p></button>
             </div>
 
-            <div id="about" class="tab-content"></div>
-            <div id="base-stats" class="tab-content"></div>
-            <div id="evolution" class="tab-content"></div>
-            <div id="moves" class="tab-content"></div>
+            <div id="about${indexCard}" class="tab-content about"></div>
+            <div id="base-stats${indexCard}" class="tab-content"></div>
+            <div id="evolution${indexCard}" class="tab-content"></div>
+            <div id="moves${indexCard}" class="tab-content"></div>
 
         </div>
 </div>
@@ -75,6 +75,24 @@ function getDialogTemplate(pokemon, colorClass, name, indexCard) {
 }
 
 
-function getAboutTemplate(){
-    
+function getAboutTemplate(pokemon, indexCard){
+return /*html*/`
+
+<table>
+    <tr>
+        <td>Height:</td>
+        <td>${pokemon.height}</td>
+    </tr>
+
+     <tr>
+        <td>Weight:</td>
+        <td>${pokemon.weight}</td>
+    </tr>
+
+     <tr>
+        <td>Abilities:</td>
+        <td id="abilities${indexCard}"></td>
+    </tr>
+</table>
+`
 }

@@ -108,15 +108,42 @@ dialog {
         button{
           cursor: pointer;
           p{
-            font-size: 12px;
+            font-size: 14px;
           }
         }
 
       }
 
       .tab-content{
-        display: none;
+        width: 100%;
+        height: 100%;
+        _display: none;
+
+
+
+      }
+
+      .about{
+         width: 100%;
+        height: 100%;
+
+        table{
+          width: 100%;
+          height: fit-content;
+          margin-top: 16px;
+          
+          tr td{
+            font-size: 14px;
+          }
+
+          tr{
+            
+          }
+        }
+
       }
     }
   }
 }
+
+

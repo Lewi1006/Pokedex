@@ -40,9 +40,14 @@ async function getPkm(arr) {
 
   // duplicate array
   pkmFiltered = currentPkmArray;
-  console.log(pkmFiltered);
+  // console.log(pkmFiltered);
   renderCard();
 }
+
+// get pokemon species url
+
+// aync function getSpecies(arr){
+// }
 
 // async function loadAndShowPkm(){
 
@@ -66,7 +71,7 @@ function renderCard() {
     let pokemon = pkmFiltered[indexCard];
     let colorClass = getTypeClass(pokemon);
     let name = toUpper(pokemon);
-    console.log(name);
+    // console.log(name);
 
     cardRef.innerHTML += getCardTemplate(pokemon, indexCard, colorClass, name);
 
@@ -105,12 +110,41 @@ function renderDialog(indexCard) {
   let colorClass = getTypeClass(pokemon);
   let name = toUpper(pokemon);
 
-  let dialogRef = document.getElementById(`dialog`);
+  const dialogRef = document.getElementById(`dialog`);
+  dialogRef.innerHTML = "";
   dialogRef.innerHTML = getDialogTemplate(pokemon, colorClass, name, indexCard);
 
   renderDialogTypes(pokemon, indexCard);
+  renderAbout(pokemon, indexCard);
 }
 
+function renderAbout(pokemon, indexCard) {
+  const aboutRef = document.getElementById(`about${indexCard}`);
+  aboutRef.innerHTML = "";
+  aboutRef.innerHTML = getAboutTemplate(pokemon, indexCard);
+
+  renderAbilities(pokemon, indexCard);
+}
+
+function renderAbilities(pokemon, indexCard) {
+  const abilitiesRef = document.getElementById(`abilities${indexCard}`);
+  abilitiesRef.innerHTML = "";
+
+  let abilities = [];
+
+  for (
+    let indexAbilities = 0;
+    indexAbilities < pokemon.abilities.length;
+    indexAbilities++
+  ) {
+    let ability = pokemon.abilities[indexAbilities].ability.name;
+    console.log(ability);
+
+    abilities.push(ability);
+  }
+
+  abilitiesRef.innerHTML = abilities.join(", ");
+}
 // #endregion
 
 // we want to prioritize certain types
