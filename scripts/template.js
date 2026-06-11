@@ -26,7 +26,7 @@ function getTypesTemplate(type) {
     `;
 }
 
-function getDialogTemplate(pokemon, colorClass, name) {
+function getDialogTemplate(pokemon, colorClass, name, indexCard) {
   return /*html*/ `
     <div class="dialog-wrapper ${colorClass}">
         <header class="dialog-header">
@@ -42,20 +42,39 @@ function getDialogTemplate(pokemon, colorClass, name) {
             
         </div>
 
-        <div>
-            <p>types</p>
+        <div class="dialog-types" id="dialog-types${indexCard}">
         </div>
 
-        <img src="${pokemon.sprites.other[`official-artwork`].front_default}" alt="${pokemon.name}" />
+        <div class="dialog-img">
+            <img src="${pokemon.sprites.other[`official-artwork`].front_default}" alt="${pokemon.name}" />
+
+        </div>
         
         </div>
 
 
          <div class="bottom">
+            <div class="tab">
+                <button class="tablinks" onclick=""><p>About</p></button>
+                <button class="tablinks" onclick=""><p>Base Stats</p></button>
+                <button class="tablinks" onclick=""><p>Evolution</p></button>
+                <button class="tablinks" onclick=""><p>Moves</p></button>
             </div>
+
+            <div id="about" class="tab-content"></div>
+            <div id="base-stats" class="tab-content"></div>
+            <div id="evolution" class="tab-content"></div>
+            <div id="moves" class="tab-content"></div>
+
+        </div>
 </div>
         
     </div>
         
     `;
+}
+
+
+function getAboutTemplate(){
+    
 }

@@ -1,14 +1,12 @@
-// local copy of API --> stores array of results (Pokemon Cards) 
+// local copy of API --> stores array of results (Pokemon Cards)
 let currentPkmArray = [];
 
-// empty Array that 
+// empty Array that
 let pkmFiltered = [];
-
 
 function init() {
   getData();
 }
-
 
 // #region fetch API data
 // all API data is currenty stored in variable const responseAsJson
@@ -24,9 +22,9 @@ async function getData() {
 }
 
 // getData passes the results array (pokemon objects) as an argument int0 getPkm(arr)
-// push the pokemon objects into new empty local array currentPkmArray[] 
+// push the pokemon objects into new empty local array currentPkmArray[]
 // iterate through results array and only fetch url property and access that data (pokemons)
-// pokemon data gets pushed into array 
+// pokemon data gets pushed into array
 // duplicate currentPkmArray to pkmFiltered so we can filter through the copy and do not touch original data
 // renderCard() cause we want to update card with the data
 async function getPkm(arr) {
@@ -46,13 +44,11 @@ async function getPkm(arr) {
   renderCard();
 }
 
-
 // async function loadAndShowPkm(){
 
 // }
 
 // #endregion
-
 
 // #region render functions
 // render pokemon cards into html by iterating through pkmFiltered array (pokemon data)
@@ -78,8 +74,7 @@ function renderCard() {
   }
 }
 
-
-// seperate rendering of types array within each pokemon(=indexCard) 
+// seperate rendering of types array within each pokemon(=indexCard)
 // access ID in getCardTemplate for types give them index as number to make them unique
 // assign the object that is at index of the type array to the variable type
 // pass type into getTypesTemplate
@@ -94,25 +89,32 @@ function renderTypes(pokemon, indexCard) {
   }
 }
 
+// render the types the same way for the dialog but address different ID in dialogTemplate
+function renderDialogTypes(pokemon, indexCard) {
+  const dialogTypesRef = document.getElementById(`dialog-types${indexCard}`);
+  dialogTypesRef.innerHTML = "";
 
-
-function renderDialog(indexCard){
-    let pokemon = pkmFiltered[indexCard];
-    let colorClass = getTypeClass(pokemon);
-    let name = toUpper(pokemon);
-
-    let dialogRef = document.getElementById(`dialog`);
-    dialogRef.innerHTML = getDialogTemplate(pokemon, colorClass, name);
+  for (let indexTypes = 0; indexTypes < pokemon.types.length; indexTypes++) {
+    let type = pokemon.types[indexTypes];
+    dialogTypesRef.innerHTML += getTypesTemplate(type);
+  }
 }
 
+function renderDialog(indexCard) {
+  let pokemon = pkmFiltered[indexCard];
+  let colorClass = getTypeClass(pokemon);
+  let name = toUpper(pokemon);
+
+  let dialogRef = document.getElementById(`dialog`);
+  dialogRef.innerHTML = getDialogTemplate(pokemon, colorClass, name, indexCard);
+
+  renderDialogTypes(pokemon, indexCard);
+}
 
 // #endregion
 
-
-
-
 // we want to prioritize certain types
-// new local array of preferred types 
+// new local array of preferred types
 // where we can compare with types array if name exists
 // loop through pref and through types array
 // if name property of types array equals any string in pref array --> return this certain value
@@ -148,29 +150,35 @@ function toUpper(pokemon) {
 // cause thats when we call the filter function where we assign new value to pkmfiltered arr
 // and since we call renderCards() after this will be know the renderedCards thats
 // why renderCards uses pkmFiltered from the start
+// only filter when more than 3 characters else just keep unfiltered array
+// filter only works if word is typed in lower case > turn all input to lower case
+
 function filterAndShowNames(filterWord) {
-  // filtered word > 3 then 
-  pkmFiltered = currentPkmArray.filter((pokemon) =>
-    pokemon.name.includes(filterWord),
-  );
+  let searchInput = filterWord.toLowerCase();
+
+  if (filterWord.length >= 3) {
+    pkmFiltered = currentPkmArray.filter((pokemon) =>
+      pokemon.name.includes(searchInput),
+    );
+  } else {
+    pkmFiltered = currentPkmArray;
+  }
   renderCard();
 }
 
-
 // #region dialog
 
-function openDialog(indexCard){
+function openDialog(indexCard) {
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.showModal();
   renderDialog(indexCard);
 }
 
-function closeDialog(){
+function closeDialog() {
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.close();
 }
 
 // #endregion
-
 
 // continue working on render function for dialog
