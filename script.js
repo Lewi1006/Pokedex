@@ -47,9 +47,9 @@ async function getPkm(arr) {
 }
 
 
-async function loadAndShowPkm(){
+// async function loadAndShowPkm(){
 
-}
+// }
 
 // #endregion
 
@@ -98,9 +98,11 @@ function renderTypes(pokemon, indexCard) {
 
 function renderDialog(indexCard){
     let pokemon = pkmFiltered[indexCard];
+    let colorClass = getTypeClass(pokemon);
+    let name = toUpper(pokemon);
 
     let dialogRef = document.getElementById(`dialog`);
-    dialogRef.innerHTML = getDialogTemplate(pokemon);
+    dialogRef.innerHTML = getDialogTemplate(pokemon, colorClass, name);
 }
 
 
@@ -135,18 +137,19 @@ function toUpper(pokemon) {
   return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
 }
 
-//  filter function is predefined and does for loop and so pokemon hére is
+// filter function is predefined and does for loop and so pokemon here is
 // not the same value as pokemon in the other functions
 // it just extracts is in the same way as in renderCard() by going through currentPkmArray and filtering it
 // .filter() is a built-in loop method
 // pokemon is just a local parameter name inside that loop
 // it is NOT connected to other pokemon variables elsewhere
 // also we need to go through the full data as in currentPkmArray and not just the Filtered
-// but filtered willl always e the same as currentPkm till we type in something into input
-// cause thats when we call the filter function where we assign new value to pkmfiltered
-// arr and since we call renderCards() after this will be know the renderedCards thats
+// but filtered will always be the same as currentPkm till we type in something into input
+// cause thats when we call the filter function where we assign new value to pkmfiltered arr
+// and since we call renderCards() after this will be know the renderedCards thats
 // why renderCards uses pkmFiltered from the start
 function filterAndShowNames(filterWord) {
+  // filtered word > 3 then 
   pkmFiltered = currentPkmArray.filter((pokemon) =>
     pokemon.name.includes(filterWord),
   );
@@ -168,9 +171,6 @@ function closeDialog(){
 }
 
 // #endregion
-
-
-
 
 
 // continue working on render function for dialog

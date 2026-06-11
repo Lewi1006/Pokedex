@@ -26,9 +26,9 @@ function getTypesTemplate(type) {
     `;
 }
 
-function getDialogTemplate(pokemon) {
+function getDialogTemplate(pokemon, colorClass, name) {
   return /*html*/ `
-    <div class="dialog-wrapper">
+    <div class="dialog-wrapper ${colorClass}">
         <header class="dialog-header">
             <img src="./assets/icons/left_arrow.svg" alt="left arrow"/>
             <img src="./assets/icons/right_arrow.svg" alt="right arrow"/>
@@ -37,7 +37,7 @@ function getDialogTemplate(pokemon) {
         <div class="body">
          <div class="top">   
          <div>
-             <h1>${pokemon.name}</h1>
+             <h1>${name}</h1>
             <p># ${pokemon.id}</p>
             
         </div>

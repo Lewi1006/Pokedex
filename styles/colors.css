@@ -53,3 +53,62 @@
 .pkm-card.fairy {
   background-color: #D685AD;
 }
+
+
+
+
+
+
+/* #region dialog */
+.dialog-wrapper.grass {
+  background-color: green;
+}
+
+.dialog-wrapper.fire {
+  background-color: #F08030;
+}
+
+.dialog-wrapper.water {
+  background-color: #6890F0;
+}
+
+.dialog-wrapper.normal {
+  background-color: #A8A77A;
+}
+
+.dialog-wrapper.rock {
+  background-color: #B6A136;
+}
+
+.dialog-wrapper.electric {
+  background-color: #F7D02C;
+}
+
+.dialog-wrapper.psychic {
+  background-color: #F95587;
+}
+
+.dialog-wrapper.poison {
+  background-color: #A33EA1;
+}
+
+.dialog-wrapper.ghost {
+  background-color: #735797;
+}
+
+.dialog-wrapper.fighting {
+  background-color: #C22E28;
+}
+
+.dialog-wrapper.ground {
+  background-color: #E2BF65;
+}
+
+.dialog-wrapper.bug {
+  background-color: #A6B91A;
+}
+
+.dialog-wrapper.fairy {
+  background-color: #D685AD;
+}
+/* #endregion */

@@ -1,10 +1,9 @@
 dialog {
   height: 100%;
   width: 100%;
-  background-color: blue;
   /* background-color: #f7f7f5; */
   margin: auto;
-  padding: 24px 16px;
+  
   border-radius: 40px;
   border: none;
 }
@@ -12,6 +11,7 @@ dialog {
 .dialog-wrapper {
   height: 100%;
   width: 100%;
+  
 
   header {
     width: 100%;
@@ -19,6 +19,7 @@ dialog {
     background-color: transparent;
     display: flex;
     justify-content: space-between;
+    padding: 24px 16px 0 16px;
 
     img {
       width: 24px;
@@ -29,11 +30,11 @@ dialog {
   .body {
     height: 100%;
     width: 100%;
-    background-color: brown;
 
     .top {
       height: 40%;
       width: 100%;
+       padding: 16px 16px;
 
       div {
         display: flex;
