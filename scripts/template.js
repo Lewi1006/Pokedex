@@ -100,7 +100,24 @@ function getAboutTemplate(pokemon, indexCard, name) {
 `;
 }
 
-function getBaseStatsTemplate(pokemon, indexCard, indexStats, statName, statValue) {
+
+
+function getBaseStatsTemplate(pokemon, indexCard, name) {
+  return /*html*/ `
+    <div class="base-stats-wrapper">
+
+        <table id="stats-table-${indexCard}">
+        </table>
+    </div>
+
+    <h2>Type defenses</h2>
+    <p>The effectniveness of each type on ${name}</p>
+    `;
+}
+
+
+
+function getStatsTableTemplate(pokemon, indexCard, indexStats, statName, statValue) {
   return /*html*/ `
     <div id="base-stats${indexCard}" class="base-stats-wrapper">
 
@@ -118,9 +135,9 @@ function getBaseStatsTemplate(pokemon, indexCard, indexStats, statName, statValu
             </td>
             </tr>
         </table>
-
-
     </div>
+
+    <div id="headline${indexCard}"></div>
     `;
 }
 
