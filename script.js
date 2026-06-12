@@ -49,8 +49,11 @@ async function getPkm(arr) {
 
 // get pokemon species url
 
-// aync function getSpecies(arr){
-// }
+async function getSpecies(arr){
+  
+}
+
+
 
 // async function loadAndShowPkm(){
 
