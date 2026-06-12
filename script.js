@@ -70,7 +70,7 @@ function renderCard() {
   for (let indexCard = 0; indexCard < pkmFiltered.length; indexCard++) {
     let pokemon = pkmFiltered[indexCard];
     let colorClass = getTypeClass(pokemon);
-    let name = toUpper(pokemon);
+    let name = capitalize(pokemon.name);
     // console.log(name);
 
     cardRef.innerHTML += getCardTemplate(pokemon, indexCard, colorClass, name);
@@ -108,7 +108,7 @@ function renderDialogTypes(pokemon, indexCard) {
 function renderDialog(indexCard) {
   let pokemon = pkmFiltered[indexCard];
   let colorClass = getTypeClass(pokemon);
-  let name = toUpper(pokemon);
+  let name = capitalize(pokemon.name);
 
   const dialogRef = document.getElementById(`dialog`);
   dialogRef.innerHTML = "";
@@ -132,7 +132,9 @@ function switchTab(tabName, indexCard) {
 function renderAbout(pokemon, indexCard) {
   const aboutRef = document.getElementById(`about${indexCard}`);
   aboutRef.innerHTML = "";
-  aboutRef.innerHTML = getAboutTemplate(pokemon, indexCard);
+
+  let name = capitalize(pokemon.name);
+  aboutRef.innerHTML = getAboutTemplate(pokemon, indexCard, name);
 
   renderAbilities(pokemon, indexCard);
 }
@@ -161,32 +163,33 @@ function renderAbilities(pokemon, indexCard) {
 
 function renderBaseStats(pokemon, indexCard) {
   const statsRef = document.getElementById(`base-stats${indexCard}`);
-  
+
   statsRef.innerHTML = "";
 
   for (let indexStats = 0; indexStats < pokemon.stats.length; indexStats++) {
     let statName = pokemon.stats[indexStats].stat.name;
-    statName = statName.replace("special-","");
+    statName = statName.replace("special-", "");
+    statName = capitalize(statName);
     let statValue = pokemon.stats[indexStats].base_stat;
 
-    statsRef.innerHTML += getBaseStatsTemplate(pokemon, indexCard, indexStats, statName, statValue);
+    statsRef.innerHTML += getBaseStatsTemplate(
+      pokemon,
+      indexCard,
+      indexStats,
+      statName,
+      statValue,
+    );
     renderPercentageStats(statValue, indexCard, indexStats);
   }
-  
 }
 
-function renderPercentageStats(statValue, indexCard, indexStats){
-const percentageRef = document.getElementById(`percentage-${indexCard}-${indexStats}`);
+function renderPercentageStats(statValue, indexCard, indexStats) {
+  const percentageRef = document.getElementById(
+    `percentage-${indexCard}-${indexStats}`,
+  );
 
-percentageRef.style.width = `${statValue}%`;
+  percentageRef.style.width = `${statValue}%`;
 }
-
-
-
-
-
-
-
 
 function renderEvolution() {}
 
@@ -214,12 +217,15 @@ function getTypeClass(pokemon) {
   return pokemon.types[0].type.name;
 }
 
-// https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
-// slice 1 --> shows everything starting from index 1 --> meaning first letter gets sliced
-function toUpper(pokemon) {
-  return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-}
+// // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+// // slice 1 --> shows everything starting from index 1 --> meaning first letter gets sliced
+// function toUpper(pokemon) {
+//   return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+// }
 
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
 // filter function is predefined and does for loop and so pokemon here is
 // not the same value as pokemon in the other functions
 // it just extracts is in the same way as in renderCard() by going through currentPkmArray and filtering it

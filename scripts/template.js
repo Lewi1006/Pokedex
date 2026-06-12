@@ -74,13 +74,13 @@ function getDialogTemplate(pokemon, colorClass, name, indexCard) {
     `;
 }
 
-function getAboutTemplate(pokemon, indexCard) {
+function getAboutTemplate(pokemon, indexCard, name) {
   return /*html*/ `
 
 <table>
     <tr>
         <td>Name:</td>
-        <td>${pokemon.name}</td>
+        <td>${name}</td>
     </tr>
     <tr>
         <td>Height:</td>
@@ -118,12 +118,6 @@ function getBaseStatsTemplate(pokemon, indexCard, indexStats, statName, statValu
             </td>
             </tr>
         </table>
-
-        <div>
-            <div class="skill-bar">
-                
-            </div>
-        </div>
 
 
     </div>
