@@ -28,7 +28,7 @@ function getTypesTemplate(type) {
 
 function getDialogTemplate(pokemon, colorClass, name, indexCard) {
   return /*html*/ `
-    <div class="dialog-wrapper ${colorClass}">
+    <div class="dialog-wrapper ${colorClass}" onclick="event.stopPropagation()">
         <header class="dialog-header">
             <img src="./assets/icons/left_arrow.svg" alt="left arrow"/>
             <img src="./assets/icons/right_arrow.svg" alt="right arrow"/>
@@ -55,13 +55,13 @@ function getDialogTemplate(pokemon, colorClass, name, indexCard) {
 
          <div class="bottom">
             <div class="tab">
-                <button class="tablinks" onclick=""><p>About</p></button>
-                <button class="tablinks" onclick=""><p>Base Stats</p></button>
-                <button class="tablinks" onclick=""><p>Evolution</p></button>
-                <button class="tablinks" onclick=""><p>Moves</p></button>
+                <button class="tablinks" onclick="switchTab('about', ${indexCard})"><p>About</p></button>
+                <button class="tablinks" onclick="switchTab('base-stats', ${indexCard})"><p>Base Stats</p></button>
+                <button class="tablinks" onclick="switchTab('evolution', ${indexCard})"><p>Evolution</p></button>
+                <button class="tablinks" onclick="switchTab('moves', ${indexCard})"><p>Moves</p></button>
             </div>
 
-            <div id="about${indexCard}" class="tab-content about"></div>
+            <div id="about${indexCard}" class="tab-content active about"></div>
             <div id="base-stats${indexCard}" class="tab-content"></div>
             <div id="evolution${indexCard}" class="tab-content"></div>
             <div id="moves${indexCard}" class="tab-content"></div>
@@ -74,11 +74,14 @@ function getDialogTemplate(pokemon, colorClass, name, indexCard) {
     `;
 }
 
-
-function getAboutTemplate(pokemon, indexCard){
-return /*html*/`
+function getAboutTemplate(pokemon, indexCard) {
+  return /*html*/ `
 
 <table>
+    <tr>
+        <td>Name:</td>
+        <td>${pokemon.name}</td>
+    </tr>
     <tr>
         <td>Height:</td>
         <td>${pokemon.height}</td>
@@ -94,5 +97,12 @@ return /*html*/`
         <td id="abilities${indexCard}"></td>
     </tr>
 </table>
-`
+`;
+}
+
+
+function getBaseStatsTemplate(pokemon, indexCard){
+    return /*html*/`
+        <p id="base-stats${indexCard}">hallo</p>
+    `
 }

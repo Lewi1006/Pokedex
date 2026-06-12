@@ -116,8 +116,21 @@ function renderDialog(indexCard) {
 
   renderDialogTypes(pokemon, indexCard);
   renderAbout(pokemon, indexCard);
+  renderBaseStats(pokemon, indexCard);
 }
 
+function switchTab(tabName, indexCard){
+  document.getElementById(`about${indexCard}`).classList.remove(`active`);
+  document.getElementById(`base-stats${indexCard}`).classList.remove(`active`);
+  document.getElementById(`evolution${indexCard}`).classList.remove(`active`);
+  document.getElementById(`moves${indexCard}`).classList.remove(`active`);
+
+  document.getElementById(`${tabName}${indexCard}`).classList.add(`active`);
+}
+
+
+
+// #region ABOUT
 function renderAbout(pokemon, indexCard) {
   const aboutRef = document.getElementById(`about${indexCard}`);
   aboutRef.innerHTML = "";
@@ -145,6 +158,16 @@ function renderAbilities(pokemon, indexCard) {
 
   abilitiesRef.innerHTML = abilities.join(", ");
 }
+
+// #endregion
+
+
+function renderBaseStats(pokemon, indexCard){
+const statsRef = document.getElementById(`base-stats${indexCard}`);
+statsRef.innerHTML += getBaseStatsTemplate(pokemon, indexCard);
+
+}
+
 // #endregion
 
 // we want to prioritize certain types

@@ -86,7 +86,6 @@ dialog {
         img {
           width: 180px;
           height: auto;
-
         }
       }
     }
@@ -99,51 +98,71 @@ dialog {
       padding: 36px 16px 16px 16px;
       z-index: 10;
 
-      .tab{
+      .tab {
         width: 100%;
         display: flex;
         justify-content: space-between;
         gap: 4px;
 
-        button{
+        button {
           cursor: pointer;
-          p{
+          width: fit-content;
+          height: fit-content;
+          _padding: 4px;
+
+          p {
             font-size: 14px;
           }
         }
+      }
+
+      .tab button:hover{
+        background-color: #f7f7f5 ;
 
       }
 
-      .tab-content{
+      .tab-content {
         width: 100%;
         height: 100%;
-        _display: none;
-
-
-
+        display: none;
       }
 
-      .about{
-         width: 100%;
+      .tab-content.active{
+        display: block;
+      }
+
+      .about {
+        width: 100%;
         height: 100%;
 
-        table{
+        table {
           width: 100%;
           height: fit-content;
           margin-top: 16px;
-          
-          tr td{
+
+          tr td {
             font-size: 14px;
+            color: #6b6b6b;;
           }
 
-          tr{
-            
+          tr {
+            width: 100%;
+            height: fit-content;
+
+            td{
+              vertical-align: top;
+            }
+
+            td:nth-child(1) {
+              width: 30%;
+            }
+
+            td:nth-child(2) {
+              width: 70%;
+            }
           }
         }
-
       }
     }
   }
 }
-
-
