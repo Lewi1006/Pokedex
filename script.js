@@ -30,12 +30,22 @@ async function getData() {
 // pokemon data gets pushed into array
 // duplicate currentPkmArray to pkmFiltered so we can filter through the copy and do not touch original data
 // renderCard() cause we want to update card with the data
+// combine objects as nested object https://www.geeksforgeeks.org/javascript/how-to-push-an-object-into-another-object-in-javascript/
 async function getPkm(arr) {
   currentPkmArray = [];
 
   for (let indexData = 0; indexData < arr.length; indexData++) {
     const response = await fetch(arr[indexData].url);
     const pokemonData = await response.json();
+
+    // get pokemon species url object
+    const responseSpecies = await fetch(pokemonData.species.url);
+    const speciesData = await responseSpecies.json()
+
+    // assign object into property so instead of url we see object
+    pokemonData.species = speciesData;
+
+    // console.log(speciesData)
 
     currentPkmArray.push(pokemonData);
     console.log(pokemonData);
@@ -44,14 +54,12 @@ async function getPkm(arr) {
   // duplicate array
   pkmFiltered = currentPkmArray;
   // console.log(pkmFiltered);
+
   renderCard();
 }
 
-// get pokemon species url
 
-async function getSpecies(arr){
-  
-}
+
 
 
 
