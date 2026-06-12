@@ -1,9 +1,260 @@
 dialog {
   height: 100%;
   width: 100%;
-  background-color: #f7f7f5;
+  /* background-color: #f7f7f5; */
   margin: auto;
-  padding: 24px 16px;
+
   border-radius: 40px;
   border: none;
 }
+
+.dialog-wrapper {
+  height: 100%;
+  width: 100%;
+
+  header {
+    width: 100%;
+    height: 48px;
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 16px 0 16px;
+
+    img {
+      width: 24px;
+      height: auto;
+      cursor: pointer;
+    }
+  }
+
+  .body {
+    height: calc(100% - 48px);
+    width: 100%;
+
+    .top {
+      height: 35%;
+      width: 100%;
+      padding: 16px 16px;
+
+      div {
+        display: flex;
+        justify-content: space-between;
+
+        h1 {
+          width: 70%;
+          height: fit-content;
+          font-family: "Nunito";
+          font-size: 20px;
+          font-weight: 800;
+          color: #f7f7f5;
+        }
+
+        p {
+          width: fit-content;
+          height: fit-content;
+          font-size: 16px;
+          color: #f7f7f5;
+        }
+      }
+
+      .dialog-types {
+        width: fit-content;
+        display: flex;
+        gap: 4px;
+        margin-top: 8px;
+
+        div {
+          width: fit-content;
+          height: fit-content;
+          padding: 4px 10px;
+          background-color: rgba(255, 255, 255, 0.2);
+          border-radius: 30px;
+
+          p {
+            color: #f7f7f5;
+          }
+        }
+      }
+
+      .dialog-img {
+        position: absolute;
+        left: 50%;
+        bottom: -40px;
+        transform: translateX(-50%);
+        z-index: 20;
+
+        img {
+          width: 180px;
+          height: auto;
+        }
+      }
+    }
+
+    .bottom {
+      height: 65%;
+      width: 100%;
+      background-color: white;
+      border-radius: 30px 30px 0 0;
+      padding: 36px 16px 16px 16px;
+      z-index: 10;
+
+      .tab {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+
+        button {
+          cursor: pointer;
+          width: fit-content;
+          height: fit-content;
+          _padding: 4px;
+
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .tab button:hover {
+        background-color: #f7f7f5;
+      }
+
+      .tab-content {
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .about {
+        width: 100%;
+        height: fit-content;
+
+        table {
+          width: 100%;
+          height: fit-content;
+          margin-top: 16px;
+
+          tr td {
+            font-size: 14px;
+            color: #6b6b6b;
+          }
+
+          tr {
+            width: 100%;
+            height: fit-content;
+
+            td {
+              vertical-align: top;
+            }
+
+            td:nth-child(1) {
+              width: 40%;
+            }
+
+            td:nth-child(2) {
+              width: 60%;
+            }
+          }
+        }
+      }
+
+      .base-stats {
+        width: 100%;
+        height: fit-content;
+        margin-top: 16px;
+        /* display: flex;
+        flex-direction: column;
+        justify-content: space-between; */
+
+        .base-stats-wrapper {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: space-between;
+
+          table {
+            width: 100%;
+            height: fit-content;
+
+            tr td {
+              font-size: 14px;
+              color: #6b6b6b;
+            }
+
+            tr {
+              width: 100%;
+              height: 100%;
+              height: fit-content;
+
+              td {
+                vertical-align: top;
+              }
+
+              td:nth-child(1) {
+                width: 25%;
+                height: 100%;
+              }
+
+              td:nth-child(2) {
+                width: 10%;
+                height: 100%;
+              }
+
+              td:nth-child(3) {
+                width: 55%;
+                height: 100%;
+
+                .bar-wrapper {
+                  display: flex;
+                  align-items: center;
+                  justify-content: end;
+                  height: 100%;
+                  width: 100%;
+
+                  .full-bar {
+                    width: 140px;
+                    height: 10px;
+                    /* background-color: #f7f7f5; */
+                    background-color: pink;
+                    border-radius: 30px;
+
+                    .percentage {
+                      height: 100%;
+                      width: 10%;
+                      background-color: red;
+                      border-radius: 30px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .stats-headline{
+          width: 100%;
+          height: fit-content;
+          margin-top: 90px;
+
+          h2 {
+            font-family: "Nunito";
+            font-weight: 800;
+            font-size: 16px;
+          }
+
+          p {
+            color: #6b6b6b;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* pokemon cards should have fixed sizes --> doesn't matter which content */

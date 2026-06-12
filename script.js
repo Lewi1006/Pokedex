@@ -1,14 +1,15 @@
-// local copy of API --> stores array of results (Pokemon Cards) 
+// local copy of API --> stores array of results (Pokemon Cards)
 let currentPkmArray = [];
 
-// empty Array that 
+// empty Array that
 let pkmFiltered = [];
 
+// index to click through pokemon cards
+let updatedIndex = 0;
 
 function init() {
   getData();
 }
-
 
 // #region fetch API data
 // all API data is currenty stored in variable const responseAsJson
@@ -24,11 +25,12 @@ async function getData() {
 }
 
 // getData passes the results array (pokemon objects) as an argument int0 getPkm(arr)
-// push the pokemon objects into new empty local array currentPkmArray[] 
+// push the pokemon objects into new empty local array currentPkmArray[]
 // iterate through results array and only fetch url property and access that data (pokemons)
-// pokemon data gets pushed into array 
+// pokemon data gets pushed into array
 // duplicate currentPkmArray to pkmFiltered so we can filter through the copy and do not touch original data
 // renderCard() cause we want to update card with the data
+// combine objects as nested object https://www.geeksforgeeks.org/javascript/how-to-push-an-object-into-another-object-in-javascript/
 async function getPkm(arr) {
   currentPkmArray = [];
 
@@ -36,23 +38,36 @@ async function getPkm(arr) {
     const response = await fetch(arr[indexData].url);
     const pokemonData = await response.json();
 
+    // get pokemon species url object
+    const responseSpecies = await fetch(pokemonData.species.url);
+    const speciesData = await responseSpecies.json()
+
+    // assign object into property so instead of url we see object
+    pokemonData.species = speciesData;
+
+    // console.log(speciesData)
+
     currentPkmArray.push(pokemonData);
     console.log(pokemonData);
   }
 
   // duplicate array
   pkmFiltered = currentPkmArray;
-  console.log(pkmFiltered);
+  // console.log(pkmFiltered);
+
   renderCard();
 }
 
 
-async function loadAndShowPkm(){
 
-}
+
+
+
+// async function loadAndShowPkm(){
+
+// }
 
 // #endregion
-
 
 // #region render functions
 // render pokemon cards into html by iterating through pkmFiltered array (pokemon data)
@@ -69,8 +84,8 @@ function renderCard() {
   for (let indexCard = 0; indexCard < pkmFiltered.length; indexCard++) {
     let pokemon = pkmFiltered[indexCard];
     let colorClass = getTypeClass(pokemon);
-    let name = toUpper(pokemon);
-    console.log(name);
+    let name = capitalize(pokemon.name);
+    // console.log(name);
 
     cardRef.innerHTML += getCardTemplate(pokemon, indexCard, colorClass, name);
 
@@ -78,8 +93,7 @@ function renderCard() {
   }
 }
 
-
-// seperate rendering of types array within each pokemon(=indexCard) 
+// seperate rendering of types array within each pokemon(=indexCard)
 // access ID in getCardTemplate for types give them index as number to make them unique
 // assign the object that is at index of the type array to the variable type
 // pass type into getTypesTemplate
@@ -94,21 +108,115 @@ function renderTypes(pokemon, indexCard) {
   }
 }
 
+// render the types the same way for the dialog but address different ID in dialogTemplate
+function renderDialogTypes(pokemon, indexCard) {
+  const dialogTypesRef = document.getElementById(`dialog-types${indexCard}`);
+  dialogTypesRef.innerHTML = "";
 
-
-function renderDialog(){
-    let dialogRef = document.getElementById(`dialog`);
-    dialogRef.innerHTML = getDialogTemplate();
+  for (let indexTypes = 0; indexTypes < pokemon.types.length; indexTypes++) {
+    let type = pokemon.types[indexTypes];
+    dialogTypesRef.innerHTML += getTypesTemplate(type);
+  }
 }
 
+function renderDialog(indexCard) {
+  let pokemon = pkmFiltered[indexCard];
+  let colorClass = getTypeClass(pokemon);
+  let name = capitalize(pokemon.name);
+
+  const dialogRef = document.getElementById(`dialog`);
+  dialogRef.innerHTML = "";
+  dialogRef.innerHTML = getDialogTemplate(pokemon, colorClass, name, indexCard);
+
+  renderDialogTypes(pokemon, indexCard);
+  renderAbout(pokemon, indexCard);
+  renderBaseStats(pokemon, indexCard);
+}
+
+// #region ABOUT
+function renderAbout(pokemon, indexCard) {
+  const aboutRef = document.getElementById(`about${indexCard}`);
+  aboutRef.innerHTML = "";
+
+  let name = capitalize(pokemon.name);
+  aboutRef.innerHTML = getAboutTemplate(pokemon, indexCard, name);
+
+  renderAbilities(pokemon, indexCard);
+}
+
+function renderAbilities(pokemon, indexCard) {
+  const abilitiesRef = document.getElementById(`abilities${indexCard}`);
+  abilitiesRef.innerHTML = "";
+
+  let abilities = [];
+
+  for (
+    let indexAbilities = 0;
+    indexAbilities < pokemon.abilities.length;
+    indexAbilities++
+  ) {
+    let ability = pokemon.abilities[indexAbilities].ability.name;
+    console.log(ability);
+
+    abilities.push(ability);
+  }
+
+  abilitiesRef.innerHTML = abilities.join(", ");
+}
 
 // #endregion
 
+// #region BASE STATS
+function renderBaseStats(pokemon, indexCard) {
+  const statsRef = document.getElementById(`base-stats${indexCard}`);
+  let name = capitalize(pokemon.name);
+  statsRef.innerHTML = getBaseStatsTemplate(pokemon, indexCard, name);
+
+  renderStatsTable(pokemon, indexCard);
+}
 
 
+function renderStatsTable(pokemon, indexCard) {
+  const statsTableRef = document.getElementById(`stats-table-${indexCard}`);
+  statsTableRef.innerHTML = "";
+
+  for (let indexStats = 0; indexStats < pokemon.stats.length; indexStats++) {
+    let statName = pokemon.stats[indexStats].stat.name;
+    statName = capitalize(statName.replace("special-", ""));
+
+    let statValue = pokemon.stats[indexStats].base_stat;
+
+    statsTableRef.innerHTML += getStatsTableTemplate(
+      pokemon,
+      indexCard,
+      indexStats,
+      statName,
+      statValue,
+    );
+
+    renderPercentageStats(statValue, indexCard, indexStats);
+  }
+}
+
+function renderPercentageStats(statValue, indexCard, indexStats) {
+  const percentageRef = document.getElementById(
+    `percentage-${indexCard}-${indexStats}`,
+  );
+
+  const statPercent = (statValue / 255) * 100;
+  percentageRef.style.width = `${statPercent}%`;
+}
+
+// #endregion
+
+// function renderEvolution() {}
+
+// function renderMoves() {}
+
+// #endregion
 
 // we want to prioritize certain types
-// new local array of preferred types 
+// new local array of preferred types
 // where we can compare with types array if name exists
 // loop through pref and through types array
 // if name property of types array equals any string in pref array --> return this certain value
@@ -127,42 +235,94 @@ function getTypeClass(pokemon) {
   return pokemon.types[0].type.name;
 }
 
-// https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
-// slice 1 --> shows everything starting from index 1 --> meaning first letter gets sliced
-function toUpper(pokemon) {
-  return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-}
+// // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+// // slice 1 --> shows everything starting from index 1 --> meaning first letter gets sliced
+// function toUpper(pokemon) {
+//   return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+// }
 
-//  filter function is predefined and does for loop and so pokemon hére is
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+// filter function is predefined and does for loop and so pokemon here is
 // not the same value as pokemon in the other functions
 // it just extracts is in the same way as in renderCard() by going through currentPkmArray and filtering it
 // .filter() is a built-in loop method
 // pokemon is just a local parameter name inside that loop
 // it is NOT connected to other pokemon variables elsewhere
 // also we need to go through the full data as in currentPkmArray and not just the Filtered
-// but filtered willl always e the same as currentPkm till we type in something into input
-// cause thats when we call the filter function where we assign new value to pkmfiltered
-// arr and since we call renderCards() after this will be know the renderedCards thats
+// but filtered will always be the same as currentPkm till we type in something into input
+// cause thats when we call the filter function where we assign new value to pkmfiltered arr
+// and since we call renderCards() after this will be know the renderedCards thats
 // why renderCards uses pkmFiltered from the start
+// only filter when more than 3 characters else just keep unfiltered array
+// filter only works if word is typed in lower case > turn all input to lower case
+
 function filterAndShowNames(filterWord) {
-  pkmFiltered = currentPkmArray.filter((pokemon) =>
-    pokemon.name.includes(filterWord),
-  );
+  let searchInput = filterWord.toLowerCase();
+
+  if (filterWord.length >= 3) {
+    pkmFiltered = currentPkmArray.filter((pokemon) =>
+      pokemon.name.includes(searchInput),
+    );
+  } else {
+    pkmFiltered = currentPkmArray;
+  }
   renderCard();
 }
 
-
 // #region dialog
 
-function openDialog(indexCard){
+function openDialog(indexCard) {
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.showModal();
-  renderDialog();
+  document.body.classList.add('no-scroll');
+
+  updatedIndex = indexCard;
+  console.log(updatedIndex);
+
+  renderDialog(indexCard);
 }
 
-function closeDialog(){
+function closeDialog() {
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.close();
+  document.body.classList.remove('no-scroll');
 }
 
 // #endregion
+
+
+function switchTab(tabName, indexCard) {
+  document.getElementById(`about${indexCard}`).classList.remove(`active`);
+  document.getElementById(`base-stats${indexCard}`).classList.remove(`active`);
+  document.getElementById(`evolution${indexCard}`).classList.remove(`active`);
+  document.getElementById(`moves${indexCard}`).classList.remove(`active`);
+
+  document.getElementById(`${tabName}${indexCard}`).classList.add(`active`);
+}
+
+
+
+function previousPokemon(){
+updatedIndex--;
+
+if(updatedIndex < 0){
+  updatedIndex = pkmFiltered.length - 1;
+}
+
+renderDialog(updatedIndex);
+}
+
+function nextPokemon(){
+  updatedIndex++;
+
+  if(updatedIndex >= pkmFiltered.length){
+    updatedIndex = 0;
+  }
+
+  renderDialog(updatedIndex);
+}
+
+
+
