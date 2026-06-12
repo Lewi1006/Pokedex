@@ -119,7 +119,7 @@ function renderDialog(indexCard) {
   renderBaseStats(pokemon, indexCard);
 }
 
-function switchTab(tabName, indexCard){
+function switchTab(tabName, indexCard) {
   document.getElementById(`about${indexCard}`).classList.remove(`active`);
   document.getElementById(`base-stats${indexCard}`).classList.remove(`active`);
   document.getElementById(`evolution${indexCard}`).classList.remove(`active`);
@@ -127,8 +127,6 @@ function switchTab(tabName, indexCard){
 
   document.getElementById(`${tabName}${indexCard}`).classList.add(`active`);
 }
-
-
 
 // #region ABOUT
 function renderAbout(pokemon, indexCard) {
@@ -161,12 +159,38 @@ function renderAbilities(pokemon, indexCard) {
 
 // #endregion
 
+function renderBaseStats(pokemon, indexCard) {
+  const statsRef = document.getElementById(`base-stats${indexCard}`);
+  
+  statsRef.innerHTML = "";
 
-function renderBaseStats(pokemon, indexCard){
-const statsRef = document.getElementById(`base-stats${indexCard}`);
-statsRef.innerHTML += getBaseStatsTemplate(pokemon, indexCard);
+  for (let indexStats = 0; indexStats < pokemon.stats.length; indexStats++) {
+    let statName = pokemon.stats[indexStats].stat.name;
+    statName = statName.replace("special-","");
+    let statValue = pokemon.stats[indexStats].base_stat;
 
+    statsRef.innerHTML += getBaseStatsTemplate(pokemon, indexCard, indexStats, statName, statValue);
+    renderPercentageStats(statValue, indexCard, indexStats);
+  }
+  
 }
+
+function renderPercentageStats(statValue, indexCard, indexStats){
+const percentageRef = document.getElementById(`percentage-${indexCard}-${indexStats}`);
+
+percentageRef.style.width = `${statValue}%`;
+}
+
+
+
+
+
+
+
+
+function renderEvolution() {}
+
+function renderMoves() {}
 
 // #endregion
 

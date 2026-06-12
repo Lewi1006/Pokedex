@@ -79,12 +79,15 @@ main {
 
     .pkm-card {
       width: 290px;
-      min-height: 200px;
-      height: auto;
+      _min-height: 200px;
+      _height: auto;
+      _max-height: 210px;
+      height: 210px;
       border-radius: 30px;
       padding: 16px;
 
       .card-header {
+        height: 28px;
         display: flex;
         justify-content: space-between;
         align-items: baseline;
@@ -105,7 +108,7 @@ main {
       }
 
       .card-body {
-        height: 100%;
+        height: calc(100% - 28px);
         width: 100%;
         display: flex;
         justify-content: space-between;

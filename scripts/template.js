@@ -62,7 +62,7 @@ function getDialogTemplate(pokemon, colorClass, name, indexCard) {
             </div>
 
             <div id="about${indexCard}" class="tab-content active about"></div>
-            <div id="base-stats${indexCard}" class="tab-content"></div>
+            <div id="base-stats${indexCard}" class="tab-content base-stats"></div>
             <div id="evolution${indexCard}" class="tab-content"></div>
             <div id="moves${indexCard}" class="tab-content"></div>
 
@@ -100,9 +100,36 @@ function getAboutTemplate(pokemon, indexCard) {
 `;
 }
 
+function getBaseStatsTemplate(pokemon, indexCard, indexStats, statName, statValue) {
+  return /*html*/ `
+    <div id="base-stats${indexCard}" class="base-stats-wrapper">
 
-function getBaseStatsTemplate(pokemon, indexCard){
-    return /*html*/`
-        <p id="base-stats${indexCard}">hallo</p>
-    `
+        <table>
+            <tr>
+                <td>${statName}</td>
+                <td>${statValue}</td>
+                <td>
+                    <div class="bar-wrapper">
+                        <div id="full-bar" class="full-bar">
+                            <div id="percentage-${indexCard}-${indexStats}" class="percentage">
+                            </div>
+                        </div>
+                    </div>
+            </td>
+            </tr>
+        </table>
+
+        <div>
+            <div class="skill-bar">
+                
+            </div>
+        </div>
+
+
+    </div>
+    `;
 }
+
+function getEvolutionTemplate() {}
+
+function getMovesTemplate() {}
