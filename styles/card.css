@@ -23,6 +23,7 @@ dialog {
     img {
       width: 24px;
       height: auto;
+      cursor: pointer;
     }
   }
 
@@ -152,11 +153,11 @@ dialog {
             }
 
             td:nth-child(1) {
-              width: 30%;
+              width: 40%;
             }
 
             td:nth-child(2) {
-              width: 70%;
+              width: 60%;
             }
           }
         }

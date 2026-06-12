@@ -276,6 +276,7 @@ function filterAndShowNames(filterWord) {
 function openDialog(indexCard) {
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.showModal();
+  document.body.classList.add('no-scroll');
 
   updatedIndex = indexCard;
   console.log(updatedIndex);
@@ -286,6 +287,7 @@ function openDialog(indexCard) {
 function closeDialog() {
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.close();
+  document.body.classList.remove('no-scroll');
 }
 
 // #endregion
