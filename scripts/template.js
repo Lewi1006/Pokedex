@@ -30,8 +30,13 @@ function getDialogTemplate(pokemon, colorClass, name, indexCard) {
   return /*html*/ `
     <div class="dialog-wrapper ${colorClass}" onclick="event.stopPropagation()">
         <header class="dialog-header">
-            <img src="./assets/icons/left_arrow.svg" alt="left arrow"/>
-            <img src="./assets/icons/right_arrow.svg" alt="right arrow"/>
+
+            <button onclick="previousPokemon()">
+                <img src="./assets/icons/left_arrow.svg" alt="left arrow"/>
+            </button>
+            <button onclick="nextPokemon()">
+                <img src="./assets/icons/right_arrow.svg" alt="right arrow"/>
+            </button>        
         </header>
 
         <div class="body">
@@ -100,8 +105,6 @@ function getAboutTemplate(pokemon, indexCard, name) {
 `;
 }
 
-
-
 function getBaseStatsTemplate(pokemon, indexCard, name) {
   return /*html*/ `
     <div class="base-stats-wrapper">
@@ -110,18 +113,21 @@ function getBaseStatsTemplate(pokemon, indexCard, name) {
         </table>
     </div>
 
+    <div class="stats-headline">
     <h2>Type defenses</h2>
     <p>The effectniveness of each type on ${name}</p>
+    </div>
     `;
 }
 
-
-
-function getStatsTableTemplate(pokemon, indexCard, indexStats, statName, statValue) {
+function getStatsTableTemplate(
+  pokemon,
+  indexCard,
+  indexStats,
+  statName,
+  statValue,
+) {
   return /*html*/ `
-    <div id="base-stats${indexCard}" class="base-stats-wrapper">
-
-        <table>
             <tr>
                 <td>${statName}</td>
                 <td>${statValue}</td>
@@ -134,13 +140,9 @@ function getStatsTableTemplate(pokemon, indexCard, indexStats, statName, statVal
                     </div>
             </td>
             </tr>
-        </table>
-    </div>
-
-    <div id="headline${indexCard}"></div>
     `;
 }
 
-function getEvolutionTemplate() {}
+// function getEvolutionTemplate() {}
 
-function getMovesTemplate() {}
+// function getMovesTemplate() {}

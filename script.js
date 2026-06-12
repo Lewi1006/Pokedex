@@ -4,6 +4,9 @@ let currentPkmArray = [];
 // empty Array that
 let pkmFiltered = [];
 
+// index to click through pokemon cards
+let updatedIndex = 0;
+
 function init() {
   getData();
 }
@@ -119,12 +122,11 @@ function renderDialog(indexCard) {
   renderBaseStats(pokemon, indexCard);
 }
 
-
 // #region ABOUT
 function renderAbout(pokemon, indexCard) {
   const aboutRef = document.getElementById(`about${indexCard}`);
   aboutRef.innerHTML = "";
-  
+
   let name = capitalize(pokemon.name);
   aboutRef.innerHTML = getAboutTemplate(pokemon, indexCard, name);
 
@@ -134,9 +136,9 @@ function renderAbout(pokemon, indexCard) {
 function renderAbilities(pokemon, indexCard) {
   const abilitiesRef = document.getElementById(`abilities${indexCard}`);
   abilitiesRef.innerHTML = "";
-  
+
   let abilities = [];
-  
+
   for (
     let indexAbilities = 0;
     indexAbilities < pokemon.abilities.length;
@@ -144,10 +146,10 @@ function renderAbilities(pokemon, indexCard) {
   ) {
     let ability = pokemon.abilities[indexAbilities].ability.name;
     console.log(ability);
-    
+
     abilities.push(ability);
   }
-  
+
   abilitiesRef.innerHTML = abilities.join(", ");
 }
 
@@ -156,24 +158,23 @@ function renderAbilities(pokemon, indexCard) {
 // #region BASE STATS
 function renderBaseStats(pokemon, indexCard) {
   const statsRef = document.getElementById(`base-stats${indexCard}`);
-  let name = capitalize(pokemon.name)
+  let name = capitalize(pokemon.name);
   statsRef.innerHTML = getBaseStatsTemplate(pokemon, indexCard, name);
 
   renderStatsTable(pokemon, indexCard);
-  
-  
 }
 
-function renderStatsTable(pokemon, indexCard){
-const statsTableRef = document.getElementById(`stats-table-${indexCard}`);
-statsTableRef.innerHTML = "";
 
-for (let indexStats = 0; indexStats < pokemon.stats.length; indexStats++) {
+function renderStatsTable(pokemon, indexCard) {
+  const statsTableRef = document.getElementById(`stats-table-${indexCard}`);
+  statsTableRef.innerHTML = "";
+
+  for (let indexStats = 0; indexStats < pokemon.stats.length; indexStats++) {
     let statName = pokemon.stats[indexStats].stat.name;
     statName = capitalize(statName.replace("special-", ""));
 
     let statValue = pokemon.stats[indexStats].base_stat;
-    
+
     statsTableRef.innerHTML += getStatsTableTemplate(
       pokemon,
       indexCard,
@@ -186,24 +187,20 @@ for (let indexStats = 0; indexStats < pokemon.stats.length; indexStats++) {
   }
 }
 
-
 function renderPercentageStats(statValue, indexCard, indexStats) {
   const percentageRef = document.getElementById(
     `percentage-${indexCard}-${indexStats}`,
   );
-  
+
   const statPercent = (statValue / 255) * 100;
   percentageRef.style.width = `${statPercent}%`;
 }
 
-
 // #endregion
 
+// function renderEvolution() {}
 
-
-function renderEvolution() {}
-
-function renderMoves() {}
+// function renderMoves() {}
 
 // #endregion
 
@@ -215,7 +212,7 @@ function renderMoves() {}
 // if not return the first name
 function getTypeClass(pokemon) {
   const preferred = ["grass", "fire", "water", "electric", "psychic", "ground"];
-  
+
   for (let indexPref = 0; indexPref < preferred.length; indexPref++) {
     for (let indexTypes = 0; indexTypes < pokemon.types.length; indexTypes++) {
       if (pokemon.types[indexTypes].type.name === preferred[indexPref]) {
@@ -223,39 +220,39 @@ function getTypeClass(pokemon) {
       }
     }
   }
-  
+
   return pokemon.types[0].type.name;
 }
 
 // // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
 // // slice 1 --> shows everything starting from index 1 --> meaning first letter gets sliced
 // function toUpper(pokemon) {
-  //   return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-  // }
-  
-  function capitalize(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  }
-  // filter function is predefined and does for loop and so pokemon here is
-  // not the same value as pokemon in the other functions
-  // it just extracts is in the same way as in renderCard() by going through currentPkmArray and filtering it
-  // .filter() is a built-in loop method
-  // pokemon is just a local parameter name inside that loop
-  // it is NOT connected to other pokemon variables elsewhere
-  // also we need to go through the full data as in currentPkmArray and not just the Filtered
-  // but filtered will always be the same as currentPkm till we type in something into input
-  // cause thats when we call the filter function where we assign new value to pkmfiltered arr
-  // and since we call renderCards() after this will be know the renderedCards thats
-  // why renderCards uses pkmFiltered from the start
-  // only filter when more than 3 characters else just keep unfiltered array
-  // filter only works if word is typed in lower case > turn all input to lower case
-  
-  function filterAndShowNames(filterWord) {
-    let searchInput = filterWord.toLowerCase();
-    
-    if (filterWord.length >= 3) {
-      pkmFiltered = currentPkmArray.filter((pokemon) =>
-        pokemon.name.includes(searchInput),
+//   return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+// }
+
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+// filter function is predefined and does for loop and so pokemon here is
+// not the same value as pokemon in the other functions
+// it just extracts is in the same way as in renderCard() by going through currentPkmArray and filtering it
+// .filter() is a built-in loop method
+// pokemon is just a local parameter name inside that loop
+// it is NOT connected to other pokemon variables elsewhere
+// also we need to go through the full data as in currentPkmArray and not just the Filtered
+// but filtered will always be the same as currentPkm till we type in something into input
+// cause thats when we call the filter function where we assign new value to pkmfiltered arr
+// and since we call renderCards() after this will be know the renderedCards thats
+// why renderCards uses pkmFiltered from the start
+// only filter when more than 3 characters else just keep unfiltered array
+// filter only works if word is typed in lower case > turn all input to lower case
+
+function filterAndShowNames(filterWord) {
+  let searchInput = filterWord.toLowerCase();
+
+  if (filterWord.length >= 3) {
+    pkmFiltered = currentPkmArray.filter((pokemon) =>
+      pokemon.name.includes(searchInput),
     );
   } else {
     pkmFiltered = currentPkmArray;
@@ -268,6 +265,10 @@ function getTypeClass(pokemon) {
 function openDialog(indexCard) {
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.showModal();
+
+  updatedIndex = indexCard;
+  console.log(updatedIndex);
+
   renderDialog(indexCard);
 }
 
@@ -278,7 +279,6 @@ function closeDialog() {
 
 // #endregion
 
-// continue working on render function for dialog
 
 function switchTab(tabName, indexCard) {
   document.getElementById(`about${indexCard}`).classList.remove(`active`);
@@ -288,3 +288,28 @@ function switchTab(tabName, indexCard) {
 
   document.getElementById(`${tabName}${indexCard}`).classList.add(`active`);
 }
+
+
+
+function previousPokemon(){
+updatedIndex--;
+
+if(updatedIndex < 0){
+  updatedIndex = pkmFiltered.length - 1;
+}
+
+renderDialog(updatedIndex);
+}
+
+function nextPokemon(){
+  updatedIndex++;
+
+  if(updatedIndex >= pkmFiltered.length){
+    updatedIndex = 0;
+  }
+
+  renderDialog(updatedIndex);
+}
+
+
+
