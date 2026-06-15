@@ -28,9 +28,10 @@
         </div>
         <div class="header-right">
           <!-- <label for="search">Search Pokemon</label> -->
-          <input
+          <input 
             type="search"
             id="pokemon-name "
+            data-id="search-input"
             placeholder="search"
             oninput="filterAndShowNames(this.value)"
           />
@@ -39,7 +40,7 @@
       </div>
     </header>
 
-    <main>
+    <main data-id="content">
       <section class="cards-section">
         <div class="content">
           <div id="pkm-card-container">
@@ -52,13 +53,13 @@
 
       <section class="loading-section">
         <div class="content">
-          <button onclick="loadMore()">Catch more</button>
+          <button id="loading-button" data-id="load-more-button" onclick="loadMore()">Catch more</button>
           <div id="loader" class="loader"></div>
         </div>
       </section>
     </main>
 
-    <dialog id="dialog" onclick="closeDialog()"></dialog>
+    <dialog id="dialog" data-id="dialog" onclick="closeDialog()"></dialog>
 
     <footer>
       <div class="content">

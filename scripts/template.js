@@ -1,6 +1,6 @@
 function getCardTemplate(pokemon, indexCard, colorClass, name) {
   return /*html*/ `
-     <div class="pkm-card ${colorClass}" onclick="openDialog(${indexCard})">
+     <div class="pkm-card ${colorClass}" data-id="card" onclick="openDialog(${indexCard})">
            <div class="card-header">
                 <h2 class="pkm-name">${name}</h2>
                 <p class="pkm-id"># ${pokemon.id}</p>
@@ -10,7 +10,7 @@ function getCardTemplate(pokemon, indexCard, colorClass, name) {
                 <div id="pkm-types-${indexCard}" >
                     
                 </div>
-                <img id="pkm-img-${indexCard}" src="${pokemon.sprites.other[`official-artwork`].front_default}" alt="${pokemon.name}" />
+                <img id="pkm-img-${indexCard}" src="${pokemon.sprites.other[`official-artwork`].front_default}" alt="${pokemon.name}" data-id="card-image"/>
                 
               </div>
 
@@ -28,14 +28,14 @@ function getTypesTemplate(type) {
 
 function getDialogTemplate(pokemon, colorClass, name, indexCard) {
   return /*html*/ `
-    <div class="dialog-wrapper ${colorClass}" onclick="event.stopPropagation()">
+    <div class="dialog-wrapper ${colorClass}" onclick="event.stopPropagation()" data-id="overlay-pokemon-name">
         <header class="dialog-header">
 
-            <button onclick="previousPokemon()">
+            <button onclick="previousPokemon()" data-id="prev-button">
                 <img src="./assets/icons/left_arrow.svg" alt="left arrow"/>
             </button>
-            <button onclick="nextPokemon()">
-                <img src="./assets/icons/right_arrow.svg" alt="right arrow"/>
+            <button onclick="nextPokemon()" data-id="next-button">
+                <img src="./assets/icons/right_arrow.svg" alt="right arrow" data-id="dialog-image"/>
             </button>        
         </header>
 

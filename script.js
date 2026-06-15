@@ -36,7 +36,9 @@ async function getData() {
   );
   const responseAsJson = await response.json();
   // console.log(responseAsJson);
-  getPkm(responseAsJson.results);
+
+  // wait till data is loaded 
+  await getPkm(responseAsJson.results);
 
   isLoading = false;
   loadingData();
@@ -47,9 +49,11 @@ async function getData() {
 function loadingData(){
   if(isLoading === true){
     loaderRef.classList.remove(`hidden`);
+    document.getElementById(`loading-button`).disabled = true;
     cardRef.classList.add(`hidden`);
   } else{
     loaderRef.classList.add(`hidden`);
+    document.getElementById(`loading-button`).disabled = false;
     cardRef.classList.remove(`hidden`);
   }
 }
