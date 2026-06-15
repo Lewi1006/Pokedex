@@ -62,14 +62,11 @@ function getDialogTemplate(pokemon, colorClass, name, indexCard) {
             <div class="tab">
                 <button class="tablinks" onclick="switchTab('about', ${indexCard})"><p>About</p></button>
                 <button class="tablinks" onclick="switchTab('base-stats', ${indexCard})"><p>Base Stats</p></button>
-                <!-- <button class="tablinks" onclick="switchTab('evolution', ${indexCard})"><p>Evolution</p></button>
-                <button class="tablinks" onclick="switchTab('moves', ${indexCard})"><p>Moves</p></button> -->
             </div>
 
             <div id="about${indexCard}" class="tab-content active about"></div>
             <div id="base-stats${indexCard}" class="tab-content base-stats"></div>
-            <!-- <div id="evolution${indexCard}" class="tab-content"></div>
-            <div id="moves${indexCard}" class="tab-content"></div> -->
+     
 
         </div>
 </div>
@@ -100,6 +97,20 @@ function getAboutTemplate(pokemon, indexCard, name) {
      <tr>
         <td>Abilities:</td>
         <td id="abilities${indexCard}"></td>
+    </tr>
+
+    <tr>
+        <td>Habitat:</td>
+        <td>${pokemon.species.habitat.name}</td>
+    </tr>
+    <tr>
+        <td>Shape:</td>
+        <td>${pokemon.species.shape.name}</td>
+    </tr>
+
+     <tr>
+        <td>Growth rate:</td>
+        <td>${pokemon.species.growth_rate.name}</td>
     </tr>
 
 </table>
@@ -144,5 +155,3 @@ function getStatsTableTemplate(
             </tr>
     `;
 }
-
-

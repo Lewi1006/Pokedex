@@ -7,6 +7,7 @@ let pkmFiltered = [];
 // index to click through pokemon cards
 let updatedIndex = 0;
 
+const cardRef = document.getElementById(`pkm-card-container`);
 const loaderRef = document.getElementById(`loader`);
 let isLoading = false;
 
@@ -46,8 +47,10 @@ async function getData() {
 function loadingData(){
   if(isLoading === true){
     loaderRef.classList.remove(`hidden`);
+    cardRef.classList.add(`hidden`);
   } else{
     loaderRef.classList.add(`hidden`);
+    cardRef.classList.remove(`hidden`);
   }
 }
 
@@ -75,6 +78,13 @@ async function getPkm(arr) {
   for (let indexData = 0; indexData < arr.length; indexData++) {
     const response = await fetch(arr[indexData].url);
     const pokemonData = await response.json();
+
+     // get pokemon species url object
+    const responseSpecies = await fetch(pokemonData.species.url);
+    const speciesData = await responseSpecies.json()
+
+        // assign object into property so instead of url we see object
+    pokemonData.species = speciesData;
 
     // console.log(speciesData)
 
@@ -327,8 +337,6 @@ function closeDialog() {
 function switchTab(tabName, indexCard) {
   document.getElementById(`about${indexCard}`).classList.remove(`active`);
   document.getElementById(`base-stats${indexCard}`).classList.remove(`active`);
-  // document.getElementById(`evolution${indexCard}`).classList.remove(`active`);
-  // document.getElementById(`moves${indexCard}`).classList.remove(`active`);
 
   document.getElementById(`${tabName}${indexCard}`).classList.add(`active`);
 }
