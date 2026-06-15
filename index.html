@@ -30,12 +30,11 @@
           <!-- <label for="search">Search Pokemon</label> -->
           <input 
             type="search"
-            id="pokemon-name "
+            id="pokemon-name"
             data-id="search-input"
             placeholder="type 3 characters"
-            oninput="filterAndShowNames(this.value)"
           />
-          <button>search</button>
+          <button onclick="searchPkm()">search</button>
         </div>
       </div>
     </header>
@@ -47,7 +46,7 @@
             <!-- JS -->
           </div>
 
-          
+          <p id="no-results">No match found!</p>
         </div>
       </section>
 

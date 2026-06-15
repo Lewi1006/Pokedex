@@ -111,84 +111,94 @@ main {
   width: 100%;
   height: fit-content;
 
-  #pkm-card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
+    #pkm-card-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
 
-    @media screen and (min-width: 678px) {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .pkm-card:hover {
-      filter: drop-shadow(5px 5px 15px #6b6b6b);
-    }
-
-    .pkm-card {
-      width: 290px;
-      height: 210px;
-      border-radius: 30px;
-      padding: 16px;
-      cursor: pointer;
-
-      .card-header {
-        height: 28px;
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        h2 {
-          width: 70%;
-          height: fit-content;
-          font-family: "Nunito";
-          font-size: clamp(24px, 3dvw, 28px);
-          font-weight: 800;
-          color: #f7f7f5;
-        }
-        p {
-          width: fit-content;
-          height: fit-content;
-          font-size: 16px;
-          color: #f7f7f5;
-        }
+      @media screen and (min-width: 678px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px;
       }
 
-      .card-body {
-        height: calc(100% - 28px);
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
+      .pkm-card:hover {
+        filter: drop-shadow(5px 5px 15px #6b6b6b);
+      }
 
-        div {
+      .pkm-card {
+        width: 290px;
+        height: 210px;
+        border-radius: 30px;
+        padding: 16px;
+        cursor: pointer;
+
+        .card-header {
+          height: 28px;
           display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          gap: 16px;
-
-          div {
+          justify-content: space-between;
+          align-items: baseline;
+          h2 {
+            width: 70%;
+            height: fit-content;
+            font-family: "Nunito";
+            font-size: clamp(24px, 3dvw, 28px);
+            font-weight: 800;
+            color: #f7f7f5;
+          }
+          p {
             width: fit-content;
             height: fit-content;
-            padding: 4px 10px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-
-            p {
-              color: #f7f7f5;
-            }
+            font-size: 16px;
+            color: #f7f7f5;
           }
         }
 
-        img {
-          height: 150px;
-          width: auto;
+        .card-body {
+          height: calc(100% - 28px);
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+
+          div {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 16px;
+
+            div {
+              width: fit-content;
+              height: fit-content;
+              padding: 4px 10px;
+              background-color: rgba(255, 255, 255, 0.2);
+              border-radius: 30px;
+
+              p {
+                color: #f7f7f5;
+              }
+            }
+          }
+
+          img {
+            height: 150px;
+            width: auto;
+          }
         }
       }
     }
+
+    p {
+      color: red;
+      font-size: 24px;
+      font-weight: 600;
+      display: none;
+      justify-self: center;
+      margin-top: 16px;
+    }
   }
-}
+
 
 .loading-section {
   width: 100%;
