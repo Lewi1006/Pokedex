@@ -289,6 +289,15 @@ function getTypeClass(pokemon) {
 function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
+
+
+
+
+function searchPkm(){
+  const inputRef = document.getElementById(`pokemon-name`);
+
+  filterAndShowNames(inputRef.value);
+}
 // filter function is predefined and does for loop and so pokemon here is
 // not the same value as pokemon in the other functions
 // it just extracts is in the same way as in renderCard() by going through currentPkmArray and filtering it
@@ -315,6 +324,9 @@ function filterAndShowNames(filterWord) {
   }
   renderCard();
 }
+
+
+
 
 // #region dialog
 
