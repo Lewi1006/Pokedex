@@ -183,6 +183,10 @@ main {
       cursor: pointer;
     }
 
+    button:disabled{
+      background-color: lightgrey;
+    }
+
 
     .loader {
       position: absolute;
