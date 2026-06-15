@@ -8,12 +8,13 @@ let pkmFiltered = [];
 let updatedIndex = 0;
 
 const loaderRef = document.getElementById(`loader`);
+let isLoading = false;
 
 // implement load more and that there is an offset
 let offset = 0;
 let limit = 20;
 
-// let isLoading = false;
+
 
 function init() {
   getData();
@@ -26,22 +27,31 @@ function init() {
 // all API data is currenty stored in variable const responseAsJson
 // call getPkm() function and pass the value of property results(shows pokemon data)
 async function getData() {
+  isLoading = true;
+  loadingData();
+
   const response = await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
   );
   const responseAsJson = await response.json();
   // console.log(responseAsJson);
-
   getPkm(responseAsJson.results);
+
+  isLoading = false;
+  loadingData();
 }
 
-// function showLoading(){
-// loaderRef.classList.remove(`hidden`);
-// }
 
-// function hideLoading(){
-// loaderRef.classList.add(`hidden`);
-// }
+
+function loadingData(){
+  if(isLoading === true){
+    loaderRef.classList.remove(`hidden`);
+  } else{
+    loaderRef.classList.add(`hidden`);
+  }
+}
+
+
 
 function loadMore(){
   limit = limit + 20;

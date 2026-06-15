@@ -46,14 +46,28 @@
             <!-- JS -->
           </div>
 
-          <button onclick="loadMore()">Load more</button>
+          
         </div>
       </section>
-      <div class="loader hidden"></div>
+
+      <section class="loading-section">
+        <div class="content">
+          <button onclick="loadMore()">Catch more</button>
+          <div id="loader" class="loader"></div>
+        </div>
+      </section>
     </main>
 
     <dialog id="dialog" onclick="closeDialog()"></dialog>
 
-    <footer></footer>
+    <footer>
+      <div class="content">
+        <div>
+          <img src="./assets/icons/copyright.svg" alt="copyright"/>
+          <p>2026</p>
+        </div>
+        <p>Leonie Wind</p>
+      </div>
+    </footer>
   </body>
 </html>
