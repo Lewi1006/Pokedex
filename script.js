@@ -36,7 +36,9 @@ async function getData() {
   );
   const responseAsJson = await response.json();
   // console.log(responseAsJson);
-  getPkm(responseAsJson.results);
+
+  // wait till data is loaded 
+  await getPkm(responseAsJson.results);
 
   isLoading = false;
   loadingData();
