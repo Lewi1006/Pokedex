@@ -327,8 +327,8 @@ function closeDialog() {
 function switchTab(tabName, indexCard) {
   document.getElementById(`about${indexCard}`).classList.remove(`active`);
   document.getElementById(`base-stats${indexCard}`).classList.remove(`active`);
-  document.getElementById(`evolution${indexCard}`).classList.remove(`active`);
-  document.getElementById(`moves${indexCard}`).classList.remove(`active`);
+  // document.getElementById(`evolution${indexCard}`).classList.remove(`active`);
+  // document.getElementById(`moves${indexCard}`).classList.remove(`active`);
 
   document.getElementById(`${tabName}${indexCard}`).classList.add(`active`);
 }

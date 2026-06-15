@@ -6,6 +6,15 @@ dialog {
 
   border-radius: 40px;
   border: none;
+
+  @media screen and (min-width: 700px) {
+    height: 700px;
+    width: 400px;
+  }
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .dialog-wrapper {
@@ -24,6 +33,11 @@ dialog {
       width: 24px;
       height: auto;
       cursor: pointer;
+
+      @media screen and (min-width: 700px) {
+        width: 30px;
+        height: auto;
+      }
     }
   }
 
@@ -36,6 +50,10 @@ dialog {
       width: 100%;
       padding: 16px 16px;
 
+      @media screen and (min-width: 700px) {
+        height: 45%;
+      }
+
       div {
         display: flex;
         justify-content: space-between;
@@ -47,6 +65,10 @@ dialog {
           font-size: 20px;
           font-weight: 800;
           color: #f7f7f5;
+
+          @media screen and (min-width: 700px) {
+            font-size: 36px;
+          }
         }
 
         p {
@@ -54,6 +76,10 @@ dialog {
           height: fit-content;
           font-size: 16px;
           color: #f7f7f5;
+
+          @media screen and (min-width: 700px) {
+            font-size: 24px;
+          }
         }
       }
 
@@ -86,6 +112,10 @@ dialog {
         img {
           width: 180px;
           height: auto;
+
+          @media screen and (min-width: 700px) {
+            width: 210px;
+          }
         }
       }
     }
@@ -98,26 +128,48 @@ dialog {
       padding: 36px 16px 16px 16px;
       z-index: 10;
 
+      @media screen and (min-width: 700px) {
+        height: 55%;
+        padding: 40px 20px 20px 20px;
+      }
+
       .tab {
         width: 100%;
+        height: 25px;
         display: flex;
-        justify-content: space-between;
-        gap: 4px;
+        /* justify-content: space-between; */
+        gap: 8px;
+
+        @media screen and (min-width: 700px) {
+          height: 30px;
+        }
 
         button {
-          cursor: pointer;
-          width: fit-content;
           height: fit-content;
-          _padding: 4px;
+          width: fit-content;
+          _border: solid red 2px;
+          _border-radius: 15px;
+          cursor: pointer;
+          padding: 4px;
 
           p {
-            font-size: 14px;
+            font-size: 18px;
+
+            @media screen and (min-width: 700px) {
+              font-size: 20px;
+            }
           }
         }
       }
 
       .tab button:hover {
+        _border: solid 2px red;
         background-color: #f7f7f5;
+        padding: 4px;
+
+        p {
+          font-weight: 600;
+        }
       }
 
       .tab-content {
@@ -140,8 +192,12 @@ dialog {
           margin-top: 16px;
 
           tr td {
-            font-size: 14px;
+            font-size: 16px;
             color: #6b6b6b;
+
+            @media screen and (min-width: 700px) {
+              font-size: 20px;
+            }
           }
 
           tr {
@@ -182,8 +238,12 @@ dialog {
             height: fit-content;
 
             tr td {
-              font-size: 14px;
+              font-size: 16px;
               color: #6b6b6b;
+
+              @media screen and (min-width: 700px) {
+                font-size: 20px;
+              }
             }
 
             tr {
@@ -196,7 +256,7 @@ dialog {
               }
 
               td:nth-child(1) {
-                width: 25%;
+                width: 30%;
                 height: 100%;
               }
 
@@ -206,7 +266,7 @@ dialog {
               }
 
               td:nth-child(3) {
-                width: 55%;
+                width: 60%;
                 height: 100%;
 
                 .bar-wrapper {
@@ -217,11 +277,15 @@ dialog {
                   width: 100%;
 
                   .full-bar {
-                    width: 140px;
+                    width: 120px;
                     height: 10px;
                     /* background-color: #f7f7f5; */
                     background-color: pink;
                     border-radius: 30px;
+
+                    @media screen and (min-width: 700px) {
+                      width: 200px;
+                    }
 
                     .percentage {
                       height: 100%;
@@ -236,20 +300,32 @@ dialog {
           }
         }
 
-        .stats-headline{
+        .stats-headline {
           width: 100%;
           height: fit-content;
-          margin-top: 50px;
+          margin-top: 40px;
+
+          @media screen and (min-width: 700px) {
+            margin-top: 20px;
+          }
 
           h2 {
             font-family: "Nunito";
             font-weight: 800;
-            font-size: 16px;
+            font-size: 18px;
+
+             @media screen and (min-width: 700px) {
+            font-size: 20px;
+          }
           }
 
           p {
             color: #6b6b6b;
-            font-size: 14px;
+            font-size: 16px;
+
+             @media screen and (min-width: 700px) {
+            font-size: 18px;
+          }
           }
         }
       }
