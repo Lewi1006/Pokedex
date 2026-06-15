@@ -102,19 +102,6 @@ function getAboutTemplate(pokemon, indexCard, name) {
         <td id="abilities${indexCard}"></td>
     </tr>
 
-    <tr>
-        <td>Habitat:</td>
-        <td>${pokemon.species.habitat.name}</td>
-    </tr>
-    <tr>
-        <td>Shape:</td>
-        <td>${pokemon.species.shape.name}</td>
-    </tr>
-
-     <tr>
-        <td>Growth rate:</td>
-        <td>${pokemon.species.growth_rate.name}</td>
-    </tr>
 </table>
 
 `;

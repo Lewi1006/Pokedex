@@ -7,22 +7,50 @@ let pkmFiltered = [];
 // index to click through pokemon cards
 let updatedIndex = 0;
 
+const loaderRef = document.getElementById(`loader`);
+
+// implement load more and that there is an offset
+let offset = 0;
+let limit = 20;
+
+// let isLoading = false;
+
 function init() {
   getData();
 }
+
+
+
 
 // #region fetch API data
 // all API data is currenty stored in variable const responseAsJson
 // call getPkm() function and pass the value of property results(shows pokemon data)
 async function getData() {
   const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`,
+    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
   );
   const responseAsJson = await response.json();
   // console.log(responseAsJson);
 
   getPkm(responseAsJson.results);
 }
+
+// function showLoading(){
+// loaderRef.classList.remove(`hidden`);
+// }
+
+// function hideLoading(){
+// loaderRef.classList.add(`hidden`);
+// }
+
+function loadMore(){
+  limit = limit + 20;
+  getData();
+
+   console.log(limit);
+}
+
+
 
 // getData passes the results array (pokemon objects) as an argument int0 getPkm(arr)
 // push the pokemon objects into new empty local array currentPkmArray[]
@@ -37,13 +65,6 @@ async function getPkm(arr) {
   for (let indexData = 0; indexData < arr.length; indexData++) {
     const response = await fetch(arr[indexData].url);
     const pokemonData = await response.json();
-
-    // get pokemon species url object
-    const responseSpecies = await fetch(pokemonData.species.url);
-    const speciesData = await responseSpecies.json()
-
-    // assign object into property so instead of url we see object
-    pokemonData.species = speciesData;
 
     // console.log(speciesData)
 
