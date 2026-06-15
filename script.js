@@ -8,21 +8,18 @@ let pkmFiltered = [];
 let updatedIndex = 0;
 
 const cardRef = document.getElementById(`pkm-card-container`);
+const noResultsRef = document.getElementById(`no-results`);
 const loaderRef = document.getElementById(`loader`);
+const loadingButtonRef = document.getElementById(`loading-button`);
 let isLoading = false;
 
 // implement load more and that there is an offset
 let offset = 0;
 let limit = 20;
 
-
-
 function init() {
   getData();
 }
-
-
-
 
 // #region fetch API data
 // all API data is currenty stored in variable const responseAsJson
@@ -37,37 +34,38 @@ async function getData() {
   const responseAsJson = await response.json();
   // console.log(responseAsJson);
 
-  // wait till data is loaded 
+  // wait till data is loaded
   await getPkm(responseAsJson.results);
 
   isLoading = false;
   loadingData();
 }
 
-
-
-function loadingData(){
-  if(isLoading === true){
+function loadingData() {
+  if (isLoading === true) {
     loaderRef.classList.remove(`hidden`);
     document.getElementById(`loading-button`).disabled = true;
-    cardRef.classList.add(`hidden`);
-  } else{
+    // cardRef.classList.add(`hidden`);
+    cardRef.style.display = "none";
+  } else {
     loaderRef.classList.add(`hidden`);
     document.getElementById(`loading-button`).disabled = false;
-    cardRef.classList.remove(`hidden`);
+    // cardRef.classList.remove(`hidden`);
+    cardRef.style.display = "flex";
   }
 }
 
+function loadMore() {
+  if(loadingButtonRef.textContent === "Return"){
+    noResultsRef.style.display = "none";
+    loadingButtonRef.textContent = "Catch more";
+  }
 
-
-function loadMore(){
   limit = limit + 20;
   getData();
 
-   console.log(limit);
+  console.log(limit);
 }
-
-
 
 // getData passes the results array (pokemon objects) as an argument int0 getPkm(arr)
 // push the pokemon objects into new empty local array currentPkmArray[]
@@ -83,11 +81,11 @@ async function getPkm(arr) {
     const response = await fetch(arr[indexData].url);
     const pokemonData = await response.json();
 
-     // get pokemon species url object
+    // get pokemon species url object
     const responseSpecies = await fetch(pokemonData.species.url);
-    const speciesData = await responseSpecies.json()
+    const speciesData = await responseSpecies.json();
 
-        // assign object into property so instead of url we see object
+    // assign object into property so instead of url we see object
     pokemonData.species = speciesData;
 
     // console.log(speciesData)
@@ -102,11 +100,6 @@ async function getPkm(arr) {
 
   renderCard();
 }
-
-
-
-
-
 
 // async function loadAndShowPkm(){
 
@@ -123,7 +116,6 @@ async function getPkm(arr) {
 // with the for loop we fill individual cards with data by filling inner.html of getCardTemplate
 // call renderTypes cause we need that value to render the Card
 function renderCard() {
-  const cardRef = document.getElementById(`pkm-card-container`);
   cardRef.innerHTML = "";
 
   for (let indexCard = 0; indexCard < pkmFiltered.length; indexCard++) {
@@ -220,7 +212,6 @@ function renderBaseStats(pokemon, indexCard) {
   renderStatsTable(pokemon, indexCard);
 }
 
-
 function renderStatsTable(pokemon, indexCard) {
   const statsTableRef = document.getElementById(`stats-table-${indexCard}`);
   statsTableRef.innerHTML = "";
@@ -290,10 +281,7 @@ function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-
-
-
-function searchPkm(){
+function searchPkm() {
   const inputRef = document.getElementById(`pokemon-name`);
 
   filterAndShowNames(inputRef.value);
@@ -315,6 +303,11 @@ function searchPkm(){
 function filterAndShowNames(filterWord) {
   let searchInput = filterWord.toLowerCase();
 
+  if (filterWord.length < 3 && filterWord.length > 0) {
+    alert("Type at least 3 characters!");
+    return;
+  }
+
   if (filterWord.length >= 3) {
     pkmFiltered = currentPkmArray.filter((pokemon) =>
       pokemon.name.includes(searchInput),
@@ -322,18 +315,27 @@ function filterAndShowNames(filterWord) {
   } else {
     pkmFiltered = currentPkmArray;
   }
+
+  noMatchFound(pkmFiltered);
   renderCard();
 }
 
-
-
+function noMatchFound(filteredArray) {
+  if (filteredArray.length === 0) {
+    noResultsRef.style.display = "flex";
+    loadingButtonRef.textContent = "Return";
+  } else {
+    noResultsRef.style.display = "none";
+    loadingButtonRef.textContent = "Catch more";
+  }
+}
 
 // #region dialog
 
 function openDialog(indexCard) {
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.showModal();
-  document.body.classList.add('no-scroll');
+  document.body.classList.add("no-scroll");
 
   updatedIndex = indexCard;
   console.log(updatedIndex);
@@ -344,11 +346,10 @@ function openDialog(indexCard) {
 function closeDialog() {
   let dialogRef = document.getElementById(`dialog`);
   dialogRef.close();
-  document.body.classList.remove('no-scroll');
+  document.body.classList.remove("no-scroll");
 }
 
 // #endregion
-
 
 function switchTab(tabName, indexCard) {
   document.getElementById(`about${indexCard}`).classList.remove(`active`);
@@ -357,27 +358,22 @@ function switchTab(tabName, indexCard) {
   document.getElementById(`${tabName}${indexCard}`).classList.add(`active`);
 }
 
+function previousPokemon() {
+  updatedIndex--;
 
-
-function previousPokemon(){
-updatedIndex--;
-
-if(updatedIndex < 0){
-  updatedIndex = pkmFiltered.length - 1;
-}
-
-renderDialog(updatedIndex);
-}
-
-function nextPokemon(){
-  updatedIndex++;
-
-  if(updatedIndex >= pkmFiltered.length){
-    updatedIndex = 0;
+  if (updatedIndex < 0) {
+    updatedIndex = pkmFiltered.length - 1;
   }
 
   renderDialog(updatedIndex);
 }
 
+function nextPokemon() {
+  updatedIndex++;
 
+  if (updatedIndex >= pkmFiltered.length) {
+    updatedIndex = 0;
+  }
 
+  renderDialog(updatedIndex);
+}
