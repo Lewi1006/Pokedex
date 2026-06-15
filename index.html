@@ -28,7 +28,12 @@
         </div>
         <div class="header-right">
           <!-- <label for="search">Search Pokemon</label> -->
-          <input type="search" id="pokemon-name "placeholder="search" oninput="filterAndShowNames(this.value)"/>
+          <input
+            type="search"
+            id="pokemon-name "
+            placeholder="search"
+            oninput="filterAndShowNames(this.value)"
+          />
           <!-- <button onclick="">search</button> -->
         </div>
       </div>
@@ -37,19 +42,32 @@
     <main>
       <section class="cards-section">
         <div class="content">
-
           <div id="pkm-card-container">
-
             <!-- JS -->
           </div>
-         
-         
+
+          
+        </div>
+      </section>
+
+      <section class="loading-section">
+        <div class="content">
+          <button onclick="loadMore()">Catch more</button>
+          <div id="loader" class="loader"></div>
         </div>
       </section>
     </main>
 
     <dialog id="dialog" onclick="closeDialog()"></dialog>
 
-    <footer></footer>
+    <footer>
+      <div class="content">
+        <div>
+          <img src="./assets/icons/copyright.svg" alt="copyright"/>
+          <p>2026</p>
+        </div>
+        <p>Leonie Wind</p>
+      </div>
+    </footer>
   </body>
 </html>
