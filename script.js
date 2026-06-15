@@ -32,39 +32,12 @@ async function getData() {
     `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
   );
   const responseAsJson = await response.json();
-  // console.log(responseAsJson);
 
   // wait till data is loaded
   await getPkm(responseAsJson.results);
 
   isLoading = false;
   loadingData();
-}
-
-function loadingData() {
-  if (isLoading === true) {
-    loaderRef.classList.remove(`hidden`);
-    document.getElementById(`loading-button`).disabled = true;
-    // cardRef.classList.add(`hidden`);
-    cardRef.style.display = "none";
-  } else {
-    loaderRef.classList.add(`hidden`);
-    document.getElementById(`loading-button`).disabled = false;
-    // cardRef.classList.remove(`hidden`);
-    cardRef.style.display = "flex";
-  }
-}
-
-function loadMore() {
-  if(loadingButtonRef.textContent === "Return"){
-    noResultsRef.style.display = "none";
-    loadingButtonRef.textContent = "Catch more";
-  }
-
-  limit = limit + 20;
-  getData();
-
-  console.log(limit);
 }
 
 // getData passes the results array (pokemon objects) as an argument int0 getPkm(arr)
@@ -88,22 +61,12 @@ async function getPkm(arr) {
     // assign object into property so instead of url we see object
     pokemonData.species = speciesData;
 
-    // console.log(speciesData)
-
     currentPkmArray.push(pokemonData);
-    console.log(pokemonData);
   }
-
   // duplicate array
   pkmFiltered = currentPkmArray;
-  // console.log(pkmFiltered);
-
   renderCard();
 }
-
-// async function loadAndShowPkm(){
-
-// }
 
 // #endregion
 
@@ -122,7 +85,6 @@ function renderCard() {
     let pokemon = pkmFiltered[indexCard];
     let colorClass = getTypeClass(pokemon);
     let name = capitalize(pokemon.name);
-    // console.log(name);
 
     cardRef.innerHTML += getCardTemplate(pokemon, indexCard, colorClass, name);
 
@@ -251,41 +213,39 @@ function renderPercentageStats(statValue, indexCard, indexStats) {
 
 // #endregion
 
-// we want to prioritize certain types
-// new local array of preferred types
-// where we can compare with types array if name exists
-// loop through pref and through types array
-// if name property of types array equals any string in pref array --> return this certain value
-// if not return the first name
-function getTypeClass(pokemon) {
-  const preferred = ["grass", "fire", "water", "electric", "psychic", "ground"];
+// #region loading data
+function loadingData() {
+  if (isLoading === true) {
+    loaderRef.classList.remove(`hidden`);
+    document.getElementById(`loading-button`).disabled = true;
+    cardRef.style.display = "none";
+  } else {
+    loaderRef.classList.add(`hidden`);
+    document.getElementById(`loading-button`).disabled = false;
+    cardRef.style.display = "flex";
+  }
+}
 
-  for (let indexPref = 0; indexPref < preferred.length; indexPref++) {
-    for (let indexTypes = 0; indexTypes < pokemon.types.length; indexTypes++) {
-      if (pokemon.types[indexTypes].type.name === preferred[indexPref]) {
-        return preferred[indexPref];
-      }
-    }
+function loadMore() {
+  if (loadingButtonRef.textContent === "Return") {
+    noResultsRef.style.display = "none";
+    loadingButtonRef.textContent = "Catch more";
   }
 
-  return pokemon.types[0].type.name;
+  limit = limit + 20;
+  getData();
+
+  console.log(limit);
 }
+//#endregion
 
-// // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
-// // slice 1 --> shows everything starting from index 1 --> meaning first letter gets sliced
-// function toUpper(pokemon) {
-//   return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-// }
-
-function capitalize(word) {
-  return word.charAt(0).toUpperCase() + word.slice(1);
-}
-
+// #region searching 
 function searchPkm() {
   const inputRef = document.getElementById(`pokemon-name`);
 
   filterAndShowNames(inputRef.value);
 }
+
 // filter function is predefined and does for loop and so pokemon here is
 // not the same value as pokemon in the other functions
 // it just extracts is in the same way as in renderCard() by going through currentPkmArray and filtering it
@@ -330,26 +290,35 @@ function noMatchFound(filteredArray) {
   }
 }
 
-// #region dialog
-
-function openDialog(indexCard) {
-  let dialogRef = document.getElementById(`dialog`);
-  dialogRef.showModal();
-  document.body.classList.add("no-scroll");
-
-  updatedIndex = indexCard;
-  console.log(updatedIndex);
-
-  renderDialog(indexCard);
-}
-
-function closeDialog() {
-  let dialogRef = document.getElementById(`dialog`);
-  dialogRef.close();
-  document.body.classList.remove("no-scroll");
-}
-
 // #endregion
+
+// #region helper functions
+// we want to prioritize certain types
+// new local array of preferred types
+// where we can compare with types array if name exists
+// loop through pref and through types array
+// if name property of types array equals any string in pref array --> return this certain value
+// if not return the first name
+function getTypeClass(pokemon) {
+  const preferred = ["grass", "fire", "water", "electric", "psychic", "ground"];
+
+  for (let indexPref = 0; indexPref < preferred.length; indexPref++) {
+    for (let indexTypes = 0; indexTypes < pokemon.types.length; indexTypes++) {
+      if (pokemon.types[indexTypes].type.name === preferred[indexPref]) {
+        return preferred[indexPref];
+      }
+    }
+  }
+
+  return pokemon.types[0].type.name;
+}
+
+// // https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript
+// // slice 1 --> shows everything starting from index 1 --> meaning first letter gets sliced
+
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
 
 function switchTab(tabName, indexCard) {
   document.getElementById(`about${indexCard}`).classList.remove(`active`);
@@ -377,3 +346,28 @@ function nextPokemon() {
 
   renderDialog(updatedIndex);
 }
+
+
+// #endregion
+
+// #region dialog
+function openDialog(indexCard) {
+  let dialogRef = document.getElementById(`dialog`);
+  dialogRef.showModal();
+  document.body.classList.add("no-scroll");
+
+  updatedIndex = indexCard;
+  console.log(updatedIndex);
+
+  renderDialog(indexCard);
+}
+
+function closeDialog() {
+  let dialogRef = document.getElementById(`dialog`);
+  dialogRef.close();
+  document.body.classList.remove("no-scroll");
+}
+
+// #endregion
+
+
