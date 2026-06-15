@@ -71,6 +71,10 @@ main {
   background-color: #f7f7f5;
   padding-top: clamp(16px, 4dvw, 30px);
   padding-bottom: 16px;
+
+   @media screen and (min-width: 678px) {
+    min-height: calc(900px - 120px - 70px);
+    }
 }
 
 .cards-section {
@@ -176,6 +180,7 @@ main {
       font-size: clamp(16px, 4dvw, 20px);
       color: red;
       font-weight: 600;
+      cursor: pointer;
     }
 
 
