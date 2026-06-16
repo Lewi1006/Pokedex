@@ -20,6 +20,9 @@
     <script src="./scripts/template.js" defer></script>
   </head>
   <body onload="init()">
+    <div id="loading-overlay">
+      <div id="loading-spinner" class="loading-spinner"></div>
+    </div>
     <header>
       <div class="content">
         <div class="header-left">
@@ -28,7 +31,7 @@
         </div>
         <div class="header-right">
           <!-- <label for="search">Search Pokemon</label> -->
-          <input 
+          <input
             type="search"
             id="pokemon-name"
             data-id="search-input"
@@ -52,8 +55,13 @@
 
       <section class="loading-section">
         <div class="content">
-          <button id="loading-button" data-id="load-more-button" onclick="loadMore()">Catch more</button>
-          <div id="loader" class="loader"></div>
+          <button
+            id="loading-button"
+            data-id="load-more-button"
+            onclick="loadMore()"
+          >
+            Catch more
+          </button>
         </div>
       </section>
     </main>
@@ -63,7 +71,7 @@
     <footer>
       <div class="content">
         <div>
-          <img src="./assets/icons/copyright.svg" alt="copyright"/>
+          <img src="./assets/icons/copyright.svg" alt="copyright" />
           <p>2026</p>
         </div>
         <p>Leonie Wind</p>
