@@ -217,7 +217,7 @@ function loadingData() {
   if (isLoading === true) {
     loaderRef.classList.remove(`hidden`);
     document.getElementById(`loading-button`).disabled = true;
-    cardRef.style.display = "none";
+    // cardRef.style.display = "none";
   } else {
     loaderRef.classList.add(`hidden`);
     document.getElementById(`loading-button`).disabled = false;
@@ -228,7 +228,7 @@ function loadingData() {
 function loadMore() {
   if (loadingButtonRef.textContent === "Return") {
     noResultsRef.style.display = "none";
-    loadingButtonRef.textContent = "Catch more";
+    // loadingButtonRef.textContent = "Catch more";
   }
 
   limit = limit + 20;
@@ -354,7 +354,7 @@ function openDialog(indexCard) {
   document.body.classList.add("no-scroll");
 
   updatedIndex = indexCard;
-  
+
   renderDialog(indexCard);
 }
 
