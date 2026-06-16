@@ -219,6 +219,7 @@ function loadingData() {
     document.body.classList.add("no-scroll");
     overlayRef.classList.remove(`hidden`);
     loadingButtonRef.classList.add(`hidden`);
+
     // loaderRef.classList.remove(`hidden`);
     // document.getElementById(`loading-button`).disabled = true;
     // cardRef.style.display = "none";
