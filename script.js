@@ -155,7 +155,6 @@ function renderAbilities(pokemon, indexCard) {
     indexAbilities++
   ) {
     let ability = pokemon.abilities[indexAbilities].ability.name;
-    console.log(ability);
 
     abilities.push(ability);
   }
@@ -234,8 +233,6 @@ function loadMore() {
 
   limit = limit + 20;
   getData();
-
-  console.log(limit);
 }
 //#endregion
 
@@ -357,8 +354,7 @@ function openDialog(indexCard) {
   document.body.classList.add("no-scroll");
 
   updatedIndex = indexCard;
-  console.log(updatedIndex);
-
+  
   renderDialog(indexCard);
 }
 
