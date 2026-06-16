@@ -189,7 +189,7 @@ main {
       }
     }
 
-    p {
+#no-results{
       color: red;
       font-size: 24px;
       font-weight: 600;
