@@ -9,6 +9,7 @@ let updatedIndex = 0;
 
 const cardRef = document.getElementById(`pkm-card-container`);
 const noResultsRef = document.getElementById(`no-results`);
+const overlayRef = document.getElementById(`loading-overlay`);
 const loaderRef = document.getElementById(`loader`);
 const loadingButtonRef = document.getElementById(`loading-button`);
 let isLoading = false;
@@ -215,13 +216,19 @@ function renderPercentageStats(statValue, indexCard, indexStats) {
 // #region loading data
 function loadingData() {
   if (isLoading === true) {
-    loaderRef.classList.remove(`hidden`);
-    document.getElementById(`loading-button`).disabled = true;
+    document.body.classList.add("no-scroll");
+    overlayRef.classList.remove(`hidden`);
+    loadingButtonRef.classList.add(`hidden`);
+    // loaderRef.classList.remove(`hidden`);
+    // document.getElementById(`loading-button`).disabled = true;
     // cardRef.style.display = "none";
   } else {
-    loaderRef.classList.add(`hidden`);
-    document.getElementById(`loading-button`).disabled = false;
-    cardRef.style.display = "flex";
+    document.body.classList.remove("no-scroll");
+    overlayRef.classList.add(`hidden`);
+    loadingButtonRef.classList.remove(`hidden`);
+    // loaderRef.classList.add(`hidden`);
+    // document.getElementById(`loading-button`).disabled = false;
+    // cardRef.style.display = "flex";
   }
 }
 
@@ -236,7 +243,7 @@ function loadMore() {
 }
 //#endregion
 
-// #region searching 
+// #region searching
 function searchPkm() {
   const inputRef = document.getElementById(`pokemon-name`);
 
@@ -344,7 +351,6 @@ function nextPokemon() {
   renderDialog(updatedIndex);
 }
 
-
 // #endregion
 
 // #region dialog
@@ -365,5 +371,3 @@ function closeDialog() {
 }
 
 // #endregion
-
-
