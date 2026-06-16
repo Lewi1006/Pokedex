@@ -219,17 +219,10 @@ function loadingData() {
     document.body.classList.add("no-scroll");
     overlayRef.classList.remove(`hidden`);
     loadingButtonRef.classList.add(`hidden`);
-
-    // loaderRef.classList.remove(`hidden`);
-    // document.getElementById(`loading-button`).disabled = true;
-    // cardRef.style.display = "none";
   } else {
     document.body.classList.remove("no-scroll");
     overlayRef.classList.add(`hidden`);
     loadingButtonRef.classList.remove(`hidden`);
-    // loaderRef.classList.add(`hidden`);
-    // document.getElementById(`loading-button`).disabled = false;
-    // cardRef.style.display = "flex";
   }
 }
 
