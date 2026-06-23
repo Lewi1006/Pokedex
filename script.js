@@ -7,6 +7,7 @@ let pkmFiltered = [];
 // index to click through pokemon cards
 let updatedIndex = 0;
 
+// global variables 
 const cardRef = document.getElementById(`pkm-card-container`);
 const noResultsRef = document.getElementById(`no-results`);
 const overlayRef = document.getElementById(`loading-overlay`);
@@ -25,6 +26,7 @@ function init() {
 // #region fetch API data
 // all API data is currenty stored in variable const responseAsJson
 // call getPkm() function and pass the value of property results(shows pokemon data)
+// loading state for implementing the loading spinner
 async function getData() {
   isLoading = true;
   loadingData();
@@ -75,7 +77,7 @@ async function getPkm(arr) {
 // render pokemon cards into html by iterating through pkmFiltered array (pokemon data)
 // a single pokemon is the value of the index of pkmFiltered
 // we assign the type to the colorClass variable so it can be passed into template
-// we call toUpper function that capitalizes name and store it in variable name that gets passed into template
+// we call capitalize function that capitalizes name and store it in variable name that gets passed into template
 // --> by passing pokemon value into it we make sure its the right index
 // with the for loop we fill individual cards with data by filling inner.html of getCardTemplate
 // call renderTypes cause we need that value to render the Card
@@ -144,6 +146,7 @@ function renderAbout(pokemon, indexCard) {
   renderAbilities(pokemon, indexCard);
 }
 
+// push abilities into ability array --> elements in array can be joined by , 
 function renderAbilities(pokemon, indexCard) {
   const abilitiesRef = document.getElementById(`abilities${indexCard}`);
   abilitiesRef.innerHTML = "";
@@ -206,10 +209,6 @@ function renderPercentageStats(statValue, indexCard, indexStats) {
 }
 
 // #endregion
-
-// function renderEvolution() {}
-
-// function renderMoves() {}
 
 // #endregion
 
